@@ -10,6 +10,8 @@ import imutils
 import pickle
 import time
 import cv2
+from PIL import Image
+
 
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
@@ -34,13 +36,13 @@ time.sleep(2.0)
 # start the FPS counter
 fps = FPS().start()
 
+cont = 0
 # loop over frames from the video file stream
 while True:
 	# grab the frame from the threaded video stream and resize it
 	# to 500px (to speedup processing)
 	frame = vs.read()
 	frame = imutils.resize(frame, width=500)
-
 	# convert the input frame from (1) BGR to grayscale (for face
 	# detection) and (2) from BGR to RGB (for face recognition)
 	gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -50,18 +52,20 @@ while True:
 	rects = detector.detectMultiScale(gray, scaleFactor=1.1,
 		minNeighbors=5, minSize=(30, 30),
 		flags=cv2.CASCADE_SCALE_IMAGE)
-	print(rects)
+	#print(rects)
 	# OpenCV returns bounding box coordinates in (x, y, w, h) order
 	# but we need them in (top, right, bottom, left) order, so we
 	# need to do a bit of reordering
 	boxes = [(y, x + w, y + h, x) for (x, y, w, h) in rects]
-	print(boxes)
-	boxes = [(int(boxes[0][0]),int(boxes[0][1]),int(boxes[0][2]),int(boxes[0][3]))]
-	print(boxes)
+	#print(boxes)
+	if len(boxes)>0:
+		boxes = [(int(boxes[0][0]),int(boxes[0][1]),int(boxes[0][2]),int(boxes[0][3]))]
+	#print(boxes)
 	# compute the facial embeddings for each face bounding box
 	encodings = face_recognition.face_encodings(rgb, boxes)
 	names = []
 
+	name = ''
 	# loop over the facial embeddings
 	for encoding in encodings:
 		# attempt to match each face in the input image to our known
@@ -92,6 +96,16 @@ while True:
 		# update the list of names
 		names.append(name)
 
+	if cont == 0 and name != '':
+		print('../Imagenes/' + name + '/' + name + '.jpg')
+		image = Image.open('../Imagenes/' + name + '/' + name + '.jpg')
+		basewidth = 300
+		wpercent = (basewidth/float(image.size[0]))
+		hsize = int((float(image.size[1])*float(wpercent)))
+		image = image.resize((basewidth,hsize), Image.ANTIALIAS)
+		#img.save('sompic.jpg')
+		image.show()
+
 	# loop over the recognized faces
 	for ((top, right, bottom, left), name) in zip(boxes, names):
 		# draw the predicted face name on the image
@@ -108,6 +122,7 @@ while True:
 	# if the `q` key was pressed, break from the loop
 	if key == ord("q"):
 		break
+	cont = cont + 1
 
 	# update the FPS counter
 	fps.update()
