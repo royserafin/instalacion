@@ -17,3 +17,7 @@
 * Generar txt con estadisticas
 * devolver nombre.
 
+# Referencias
+
+[Recognize faces on a Raspberry Pi w/ camera](https://github.com/ageitgey/face_recognition/blob/master/examples/facerec_on_raspberry_pi.py)
+[Run a web service to recognize faces via HTTP (Requires Flask to be installed)](https://github.com/ageitgey/face_recognition/blob/master/examples/web_service_example.py)
