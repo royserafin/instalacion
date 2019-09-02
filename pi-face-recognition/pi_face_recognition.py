@@ -25,7 +25,9 @@ args = vars(ap.parse_args())
 # cascade for face detection
 print("[INFO] loading encodings + face detector...")
 data = pickle.loads(open(args["encodings"], "rb").read())
-detector = cv2.CascadeClassifier(args["cascade"])
+str=args["cascade"]
+print(str)
+detector = cv2.CascadeClassifier(f'/Users/jeroaranda/anaconda3/lib/python3.7/site-packages/cv2/data/'+str)
 
 # initialize the video stream and allow the camera sensor to warm up
 print("[INFO] starting video stream...")
