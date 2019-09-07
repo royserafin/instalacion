@@ -11,8 +11,6 @@ import pickle
 import time
 import cv2
 from PIL import Image
-from numpy import linalg as la
-
 
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
@@ -65,9 +63,6 @@ while True:
 	# compute the facial embeddings for each face bounding box
 	encodings = face_recognition.face_encodings(rgb, boxes)
 	names = []
-	#######################
-	##Checar face_recognition.face_distance(,)
-	#######################
 	name = ''
 	# loop over the facial embeddings
 	for encoding in encodings:
@@ -75,8 +70,6 @@ while True:
 		# encodings
 		matches = face_recognition.compare_faces(data["encodings"],
 			encoding)
-		#norms = face_recognition.face_distance(data["encodings"], encoding)
-		#index = argmin(norms)
 		name = "Unknown"
 
 		# check to see if we have found a match
@@ -102,6 +95,7 @@ while True:
 		names.append(name)
 		print(names)
 	if cont == 0 and name != 'Unknown':
+
 		print('../Imagenes/' + name + '/' + name + '.jpg')
 		image = Image.open('../Imagenes/' + name + '/' + name + '.jpg')
 		basewidth = 300
@@ -121,7 +115,7 @@ while True:
 			0.75, (0, 255, 0), 2)
 
 	# display the image to our screen
-	cv2.imshow("Frameasdfa", frame)
+	cv2.imshow("Frame", frame)
 	key = cv2.waitKey(1) & 0xFF
 
 	# if the `q` key was pressed, break from the loop
