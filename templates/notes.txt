@@ -1,0 +1,16 @@
+Index.html
+Q1.html
+Q2.html
+Q3.html
+Q4.html
+Q5.html
+Camara.html (use tracking.js) [take 10 photos and send to python]
+Compare.html [show photo and data + comparationphoto and comparationdata]
+Comotu.html [show other comparation data]
+Mensaje.html [show message]
+Call2action.html [show call to action + get email + send email(?)]
+
+https://eloquentjavascript.net/18_http.html
+
+http://javascript-coder.com/html-form/html-form-action.phtml
+http://javascript-coder.com/html-form/form-validation.phtml

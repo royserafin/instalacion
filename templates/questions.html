@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="BrunoSLopezF">
+
+    <title>Un ejercicio de conciencia</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/cover/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap_files/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="cover.css" rel="stylesheet">
+  </head>
+
+  <body class="text-center" cz-shortcut-listen="true">
+
+    <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+      <header class="masthead mb-auto">
+        <div class="inner">
+        </div>
+      </header>
+
+      <main role="main" class="inner cover">
+          <div class = "unhidden" id = "question1">
+              <form name="myform" id="myform">
+                  <div class="form-group">
+                      <label for="NombreInput">Ingresa tu nombre: </label>
+                      <input type="text" class="form-control" id="NombreInput" placeholder="Nombre">
+                    </div>
+                </form>
+                <p class="lead">
+                    <input class="btn btn-lg btn-secondary" type="button" onclick="unhide('question2', 'question1') " value="Continuar">
+                </p>
+            </div>
+            <div class = "hidden" id="question2">
+                <form>
+                    <div class="form-group">
+                        <label for="EdadInput">Ingresa tu edad: </label>
+                        <input type="number" class="form-control" id="EdadInput" placeholder="Edad">
+                    </div>
+                </form>
+                <p class="lead">
+                        <input class="btn btn-lg btn-secondary" type="button" onclick="unhide('question3', 'question2') " value="Continuar">
+                </p>
+            </div>
+            <div class = "hidden" id = "question3">
+                <form>
+                    <div class="form-group">
+                        <label for="EstaturaInput">Ingresa tu estatura: (m&sup2;) </label>
+                        <input type="number" class="form-control" id="EstaturaInput" placeholder="Estatura">
+                    </div>
+                </form>
+                <p class="lead">
+                        <input class="btn btn-lg btn-secondary" type="button" onclick="unhide('question4', 'question3') " value="Continuar">
+                </p>
+            </div>
+            <div class = "hidden" id = "question4">
+                <form>
+                    <div class="form-group">
+                        <label for="EstadoSelect">Selecciona tu Estado:</label>
+                        <select js-state-select class="form-control" id="EstadoSelect" placeholder="Estado"></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="MunicipioSelect">Selecciona el municipio: </label>
+                        <select js-city-select class="form-control" id="MunicipioSelect" placeholder="Municipio">
+                            <option>Municipio</option>
+                        </select>
+                    </div>
+                </form>
+                <p class="lead">
+                    <a href="caracara.html" class="btn btn-lg btn-secondary">Continuar</a>
+                </p>
+            </div>
+      </main>
+
+      <footer class="mastfoot mt-auto">
+        <!--<div class="inner">
+          <p>Cover template for <a href="https://getbootstrap.com/">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+        </div> -->
+      </footer>
+    </div>
+    <script type="text/javascript">
+    function unhide(divID, otherDivId) {
+            var item = document.getElementById(divID);
+            if (item) {
+                item.className=(item.className=='hidden')?'unhidden':'hidden';
+            }
+            document.getElementById(otherDivId).className = 'hidden';
+        }
+        
+        
+    </script>
+    <script>        
+            let requestedData;
+            let stateSelect = document.querySelector('[js-state-select]');
+            let citySelect = document.querySelector('[js-city-select]');
+      
+            let loadData = function(callback) {
+              let xhttp = new XMLHttpRequest();
+              xhttp.onreadystatechange = function() {
+                  if (this.readyState == 4 && this.status == 200) {
+                  fillStatesSelect(this.responseText);
+                  }
+              };
+              xhttp.open("GET", "https://raw.githubusercontent.com/martinciscap/json-estados-municipios-mexico/master/estados-municipios.json?fbclid=IwAR3pachbWf58PUXF0ZsBOw8ScuwQuoGsgPXJTpoKnw_xKHDb047679RfqW4", true);
+              xhttp.send();
+              }
+      
+              let fillCitiesSelect = function() {
+                  let cities = requestedData[stateSelect.value];
+                  let options = [];            
+                  citySelect.innerHTML = '';
+                  cities.forEach((x, i) => {
+                      options[i] = document.createElement('option');
+                      options[i].setAttribute('value', x);
+                      options[i].innerText = x;
+                      citySelect.appendChild(options[i]);
+                  });
+              }
+      
+              let fillStatesSelect = function(data) {
+                  let options = [];
+                  requestedData = JSON.parse(data);
+                  Object.keys(requestedData).forEach((x, i) => {
+                      options[i] = document.createElement('option');
+                      options[i].setAttribute('value', x);
+                      options[i].innerText = x;
+                      stateSelect.appendChild(options[i]);
+                  });
+                  stateSelect.addEventListener('change', fillCitiesSelect);
+              }
+              loadData(fillStatesSelect);
+        </script>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="bootstrap_files/jquery-3.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+<script src="bootstrap_files/popper.js"></script>
+<script src="bootstrap_files/bootstrap.js"></script> 
+
+</body></html>
