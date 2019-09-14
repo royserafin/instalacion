@@ -62,4 +62,4 @@ archivo = '../Imagenes/' + nombre + '/' + nombre + '.jpg'
 print(archivo)
 
 # do a bit of cleanup
-cv2.destroyAllWindows()
+#cv2.destroyAllWindows()

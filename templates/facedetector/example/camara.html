@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>facedetector - detecting/tracking faces</title>
+    <style>
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #333
+    }
+    canvas {
+      position: absolute;
+    }
+    #myProgress {
+  width: 100%;
+  background-color: #ddd;
+  position:absolute;
+  left:0px;
+  top:0px;
+  float:left;
+    }
+
+    #myBar {
+      width: 50%;
+      height: 20px;
+      background-color: #4CAF50;
+    }
+    
+    
+  </style>
+</head>
+
+<body onload="">
+
+ <p class="lead">
+          <a onclick="move()" class="btn btn-lg btn-secondary">Continuar</a>
+        </p>
+
+<video id="video" autoplay
+       style="width: 640px; height: 350px; border: 1px solid black;"></video>
+<canvas id="canvas" ></canvas>
+
+<div id="myProgress">
+  <div id="myBar"></div>
+</div>
+
+
+<script src="static/bootstrap_files/jquery-3.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+<script src="static/bootstrap_files/popper.js"></script>
+<script src="static/bootstrap_files/bootstrap.js"></script> 
+
+<script src="{{ url_for('static', filename='js/FaceDetector.js') }}"></script>
+<script src="{{ url_for('static', filename='js/WebcamManager.js') }}"></script>
+<script>
+        function move() {
+          var elem = document.getElementById("myBar");   
+          var width = 1;
+          var id = setInterval(frame, 100);
+          function frame() {
+            if (width >= 100) {
+              clearInterval(id);
+            } else {
+              width++; 
+              elem.style.width = width + '%'; 
+            }
+          }
+        }
+
+
+
+    var camStreamWidth = 640;
+    var camStreamHeight = 350;
+
+    var VIEW_WIDTH = 640;
+    var VIEW_HEIGHT = 350;
+
+    var video = document.getElementById("video");
+    var canvas = document.getElementById("canvas");
+
+    canvas.width = VIEW_WIDTH;
+    canvas.height = VIEW_HEIGHT;
+
+    var webcamParams = {
+        video: {
+            mandatory: {
+                maxWidth: camStreamWidth,
+                maxHeight: camStreamHeight,
+                minWidth: camStreamWidth,
+                minHeight: camStreamHeight
+            }
+        }
+    };
+    var webcamMgr = new WebCamManager(
+        {
+            webcamParams: webcamParams, //Set params for web camera
+            testVideoMode: false,//true:force use example video for test false:use web camera
+            videoTag: video
+        }
+    );
+
+    var faceDetector = new FaceDetector(
+        {
+            video: webcamMgr.getVideoTag(),
+            flipLeftRight: false,
+            flipUpsideDown: false
+        }
+    );
+
+    webcamMgr.setOnGetUserMediaCallback(function () {
+        faceDetector.startDetecting();
+    });
+
+    faceDetector.setOnFaceAddedCallback(function (addedFaces, detectedFaces) {
+        for (var i = 0; i < addedFaces.length; i++) {
+            console.log("[facedetector] New face detected id=" + addedFaces[i].faceId + " index=" + addedFaces[i].faceIndex);
+        }
+    });
+
+    faceDetector.setOnFaceLostCallback(function (lostFaces, detectedFaces) {
+
+        var ctx = canvas.getContext("2d");
+        ctx.clearRect(0, 0, VIEW_WIDTH, VIEW_HEIGHT);
+
+        for (var i = 0; i < lostFaces.length; i++) {
+            console.log("[facedetector] Face removed id=" + lostFaces[i].faceId + " index=" + lostFaces[i].faceIndex);
+        }
+
+    });
+
+    faceDetector.setOnFaceUpdatedCallback(function (detectedFaces) {
+
+        var ctx = canvas.getContext("2d");
+        ctx.clearRect(0, 0, VIEW_WIDTH, VIEW_HEIGHT);
+
+        ctx.strokeStyle = "white";
+        ctx.lineWidth = 3;
+        ctx.fillStyle = "white";
+        ctx.font = "10px arial";
+
+        for (var i = 0; i < detectedFaces.length; i++) {
+
+            var face = detectedFaces[i];
+
+            ctx.fillText('Identificando persona desaparecida', face.x * VIEW_WIDTH, face.y * VIEW_HEIGHT);
+            ctx.strokeRect(face.x * VIEW_WIDTH, face.y * VIEW_HEIGHT + 10, face.width * VIEW_WIDTH, face.height * VIEW_HEIGHT);
+
+        }
+    });
+
+
+    webcamMgr.startCamera();
+
+</script>
+</body>
+</html>
