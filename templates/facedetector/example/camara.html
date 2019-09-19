@@ -27,7 +27,7 @@
     }
 
     #myBar {
-      width: 50%;
+      width: 1%;
       height: 20px;
       background-color: #4CAF50;
     }
@@ -39,12 +39,15 @@
 <body onload="">
 
  <p class="lead">
-          <a onclick="move()" class="btn btn-lg btn-secondary">Continuar</a>
+          <a onclick="move(); take_photo()" class="btn btn-lg btn-secondary">Continuar</a>
         </p>
 
 <video id="video" autoplay
        style="width: 640px; height: 350px; border: 1px solid black;"></video>
 <canvas id="canvas" ></canvas>
+
+<canvas id="imagen" style="display:none" width="640" height="350"></canvas>
+<img id="photo" style="visibility: hidden; display: none" src=""></img>
 
 <div id="myProgress">
   <div id="myBar"></div>
@@ -58,7 +61,64 @@
 
 <script src="{{ url_for('static', filename='js/FaceDetector.js') }}"></script>
 <script src="{{ url_for('static', filename='js/WebcamManager.js') }}"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
 <script>
+
+        function base64ToBlob(base64, mime) 
+        {
+            mime = mime || '';
+            var sliceSize = 1024;
+            var byteChars = window.atob(base64);
+            var byteArrays = [];
+
+            for (var offset = 0, len = byteChars.length; offset < len; offset += sliceSize) {
+                var slice = byteChars.slice(offset, offset + sliceSize);
+
+                var byteNumbers = new Array(slice.length);
+                for (var i = 0; i < slice.length; i++) {
+                    byteNumbers[i] = slice.charCodeAt(i);
+                }
+
+                var byteArray = new Uint8Array(byteNumbers);
+
+                byteArrays.push(byteArray);
+            }
+
+            return new Blob(byteArrays, {type: mime});
+        }
+
+
+
+
+
+        function take_photo(){
+            canva = document.getElementById('imagen');
+            context = canva.getContext('2d');
+            photo = document.getElementById('photo');
+            context.drawImage(video,0,0,640,350);
+            photo.setAttribute('src', canva.toDataURL('image/png'));
+            
+
+            var url = "/image-send";                
+            var image = $('#photo').attr('src');
+            var base64ImageContent = image.replace(/^data:image\/(png|jpg);base64,/, "");
+            var blob = base64ToBlob(base64ImageContent, 'image/jpg');                
+            var formData = new FormData();
+            formData.append('imagen', blob);
+            formData.append('foto', 0);
+
+            $.ajax({
+                url: url, 
+                type: "POST", 
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: formData})
+                .done(function(e){
+                    alert('done!');
+                });
+             }
         function move() {
           var elem = document.getElementById("myBar");   
           var width = 1;

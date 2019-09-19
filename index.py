@@ -1,5 +1,8 @@
 from flask import render_template
 from flask import Flask
+from flask import request
+import base64
+
 
 app = Flask(__name__)
 
@@ -24,4 +27,20 @@ def message(name=None):
 @app.route('/camara')
 def camara(name=None):
     return render_template('facedetector/example/camara.html')
+
+@app.route('/image-send', methods=['POST'])
+def imagesend():
+	#i = request.files['foto'].read()
+	
+	data = request.files['imagen'].read()
+	foto_index = request.form["foto"]
+	imgdata = base64.b64decode(data)
+
+	filename = 'Faces/' + foto_index + '.jpg'  # I assume you have a way of picking unique filenames
+	with open(filename, 'wb') as f:
+		f.write(data)
+	
+	return ''
+    
+	
 
