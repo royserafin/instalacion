@@ -2,6 +2,7 @@ from flask import render_template
 from flask import Flask
 from flask import request
 import base64
+import facerec.face_recognition_ins as fr
 
 
 app = Flask(__name__)
@@ -39,6 +40,7 @@ def imagesend():
 	filename = 'Faces/' + foto_index + '.jpg'  # I assume you have a way of picking unique filenames
 	with open(filename, 'wb') as f:
 		f.write(data)
+	fr.encuentra_cara()
 	
 	return ''
     

@@ -21,8 +21,8 @@ def encuentra_cara():
     # load the known faces and embeddings along with OpenCV's Haar
     # cascade for face detection
     print("[INFO] loading encodings + face detector...")
-    data = pickle.loads(open('encodings.pickle', "rb").read())
-    detector = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+    data = pickle.loads(open('facerec/encodings.pickle', "rb").read())
+    detector = cv2.CascadeClassifier('facerec/haarcascade_frontalface_default.xml')
     indexes = []
     counts = {}
     for i in range(1):
@@ -33,9 +33,9 @@ def encuentra_cara():
     #        image = np.empty((240*320*3,), dtype = np.uint8)
     #        camera.capture(image, 'bgr')
     #        frame = image.reshape((240, 320, 3))
-        print('../Faces/' + str(i) + '.jpg')
-        #frame = Image.open('../Faces/' + str(i) + '.jpg')
-        frame = cv2.imread('../Faces/' + str(i) + '.jpg')
+        print('Faces/' + str(i) + '.jpg')
+        #frame = Image.open('Faces/' + str(i) + '.jpg')
+        frame = cv2.imread('Faces/' + str(i) + '.jpg')
         frame = imutils.resize(frame, width=500)
         # convert the input frame from (1) BGR to grayscale (for face
         # detection) and (2) from BGR to RGB (for face recognition)
@@ -71,7 +71,7 @@ def encuentra_cara():
         print(key, value)
     nombre = max(counts, key=counts.get)
 
-    archivo = '../Imagenes/' + nombre + '/' + nombre + '.jpg'
+    archivo = 'Imagenes/' + nombre + '/' + nombre + '.jpg'
     print(archivo)
 
     # do a bit of cleanup
