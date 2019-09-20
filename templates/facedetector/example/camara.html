@@ -116,7 +116,8 @@
                 processData: false,
                 data: formData})
                 .done(function(e){
-                    alert('done!');
+                    alert(e.result);
+                    window.location.href = 'caracara';
                 });
              }
         function move() {

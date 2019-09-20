@@ -73,6 +73,8 @@ def encuentra_cara():
 
     archivo = 'Imagenes/' + nombre + '/' + nombre + '.jpg'
     print(archivo)
-
+    return archivo
     # do a bit of cleanup
     #cv2.destroyAllWindows()
+
+encuentra_cara()

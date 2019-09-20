@@ -1,8 +1,9 @@
 from flask import render_template
 from flask import Flask
-from flask import request
+from flask import request, jsonify
 import base64
 import facerec.face_recognition_ins as fr
+
 
 
 app = Flask(__name__)
@@ -16,7 +17,7 @@ def questions(name=None):
     return render_template('questions.html')
 
 
-@app.route('/caracara.html')
+@app.route('/caracara')
 def cara(name=None):
     return render_template('caracara.html')
 
@@ -38,11 +39,11 @@ def imagesend():
 	imgdata = base64.b64decode(data)
 
 	filename = 'Faces/' + foto_index + '.jpg'  # I assume you have a way of picking unique filenames
-	with open(filename, 'wb') as f:
-		f.write(data)
-	fr.encuentra_cara()
+#	with open(filename, 'wb') as f:
+#		f.write(data)
+	nombre = fr.encuentra_cara()
 	
-	return ''
+	return jsonify(result=nombre)
     
 	
 
