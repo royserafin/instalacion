@@ -1,16 +1,18 @@
+import pickle
+import argparse
+import imutils
+import pickle
+from time import sleep
+import cv2
+from PIL import Image
+import numpy as np
+from numpy import linalg as la
+import face_recognition
     # USAGE
     # python pi_face_recognition.py --cascade haarcascade_frontalface_default.xml --encodings encodings.pickle
 def encuentra_cara():
     # import the necessary packages
-    import face_recognition
-    import argparse
-    import imutils
-    import pickle
-    from time import sleep
-    import cv2
-    from PIL import Image
-    import numpy as np
-    from numpy import linalg as la
+
     
 
     #camera = PiCamera()
@@ -71,10 +73,9 @@ def encuentra_cara():
         print(key, value)
     nombre = max(counts, key=counts.get)
 
-    archivo = 'Imagenes/' + nombre + '/' + nombre + '.jpg'
+    archivo = nombre 
     print(archivo)
     return archivo
     # do a bit of cleanup
     #cv2.destroyAllWindows()
 
-encuentra_cara()

@@ -12,10 +12,10 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/cover/">
 
     <!-- Bootstrap core CSS -->
-    <link href="static/bootstrap_files/bootstrap.css" rel="stylesheet">
+    <link href=" {{ url_for('static', filename='bootstrap_files/bootstrap.css') }} " rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="static/cover.css" rel="stylesheet">
+    <link href=" {{ url_for('static', filename='cover.css') }}" rel="stylesheet">
   </head>
 
   <body class="text-center" cz-shortcut-listen="true">
@@ -33,7 +33,7 @@
                         <p>RODOLFO OCAMPO BLANCO</p>
                     </div>
                     <div class="col">
-                        <p>ALFREDO ALEJANDRO BARRIOS IBARRA</p>
+                        <p> {{ nombre }} </p>
                     </div>
                 </div>
                 <div class="row">
@@ -63,7 +63,7 @@
                     <div class = "col">
                         <!--DATOS BASE-->
                         <p align="left">
-                            <strong>Edad: </strong> 25 <br>
+                            <strong>Edad: </strong> {{ edad }} <br>
                             <strong>Estatura: </strong> 1.72 <br>
                             <strong>Estado: </strong> Tamaulipas <br>
                             <strong>Municipio: </strong> Victoria <br>
@@ -83,14 +83,29 @@
         </div> -->
       </footer>
     </div>
+<script>
+    $.ajax({
+                url: url, 
+                type: "POST", 
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: formData})
+                .done(function(e){
+                    alert(e.result);
+                    window.location.href = 'caracara';
+                });
+             }
+</script>
 
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="static/bootstrap_files/jquery-3.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src=" {{ url_for('static', filename='bootstrap_files/jquery-3.js') }}" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-<script src="static/bootstrap_files/popper.js"></script>
-<script src="static/bootstrap_files/bootstrap.js"></script> 
+<script src=" {{ url_for('static', filename='bootstrap_files/popper.js') }}"></script>
+<script src=" {{ url_for('static', filename='bootstrap_files/bootstrap.js') }}"></script> 
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
 </body></html>
