@@ -43,10 +43,10 @@
         </p>
 
 <video id="video" autoplay
-       style="width: 640px; height: 350px; border: 1px solid black;"></video>
+       style="width: 640px; height: 640px; border: 1px solid black;"></video>
 <canvas id="canvas" ></canvas>
 
-<canvas id="imagen" style="display:none" width="640" height="350"></canvas>
+<canvas id="imagen" style="display:none" width="640" height="640"></canvas>
 <img id="photo" style="visibility: hidden; display: none" src=""></img>
 
 <div id="myProgress">
@@ -96,7 +96,7 @@
             canva = document.getElementById('imagen');
             context = canva.getContext('2d');
             photo = document.getElementById('photo');
-            context.drawImage(video,0,0,640,350);
+            context.drawImage(video,0,0,640,640);
             photo.setAttribute('src', canva.toDataURL('image/png'));
             
 
@@ -117,7 +117,7 @@
                 data: formData
                 })
                 .done(function(e){
-                    window.location.href="caracara/"+e.nombreD+"/"+e.edadD+"/"+e.estaturaD+"/"+e.estadoD+"/"+e.municipioD+"/"+e.fechaD+"/"+e.nombreU+"/"+e.edadU+"/"+e.estaturaU+"/"+e.estadoU+"/"+e.municipioU             
+                    window.location.href="caracara/"+e.nombre+"/"+e.nombreD+"/"+e.edadD+"/"+e.estaturaD+"/"+e.estadoD+"/"+e.municipioD+"/"+e.fechaD+"/"+e.nombreU+"/"+e.edadU+"/"+e.estaturaU+"/"+e.estadoU+"/"+e.municipioU             
                 });
              }
         function move() {
@@ -137,10 +137,10 @@
 
 
     var camStreamWidth = 640;
-    var camStreamHeight = 350;
+    var camStreamHeight = 640;
 
     var VIEW_WIDTH = 640;
-    var VIEW_HEIGHT = 350;
+    var VIEW_HEIGHT = 640;
 
     var video = document.getElementById("video");
     var canvas = document.getElementById("canvas");
