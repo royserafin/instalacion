@@ -56,12 +56,12 @@
 
 <script src="static/bootstrap_files/jquery-3.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-<script src="static/bootstrap_files/popper.js"></script>
-<script src="static/bootstrap_files/bootstrap.js"></script> 
+<script src="static/bootstrap_files/popper.js"></script> <!--Cambiar a url for static -->
+<script src="static/bootstrap_files/bootstrap.js"></script> <!-- Cambiar a url for static -->
 
 <script src="{{ url_for('static', filename='js/FaceDetector.js') }}"></script>
 <script src="{{ url_for('static', filename='js/WebcamManager.js') }}"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> <!--Obtener js para correrlo local-->
 
 <script>
 
@@ -114,10 +114,10 @@
                 cache: false,
                 contentType: false,
                 processData: false,
-                data: formData})
+                data: formData
+                })
                 .done(function(e){
-                    alert(e.result);
-                    window.location.href = 'caracara/' + e.result + '/25';
+                    window.location.href="caracara/"+e.nombreD+"/"+e.edadD+"/"+e.estaturaD+"/"+e.estadoD+"/"+e.municipioD+"/"+e.fechaD+"/"+e.nombreU+"/"+e.edadU+"/"+e.estaturaU+"/"+e.estadoU+"/"+e.municipioU             
                 });
              }
         function move() {

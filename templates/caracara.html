@@ -30,10 +30,10 @@
             <div class="container">
                 <div class="row">
                     <div class="col">
-                        <p>RODOLFO OCAMPO BLANCO</p>
+                        <p>{{nombreU}}</p>
                     </div>
                     <div class="col">
-                        <p> {{ nombre }} </p>
+                        <p> {{ nombreD }} </p>
                     </div>
                 </div>
                 <div class="row">
@@ -45,7 +45,7 @@
                     </div>
                     <div class="col">
                             <div class="card">
-                                <img class="card-img-top" src= "{{ url_for('static', filename='Imagenes/')}}{{ nombre }}/{{ nombre }}.jpg"  }} alt="Card image cap">
+                                <img class="card-img-top" src= "{{ url_for('static', filename='Imagenes/')}}{{ nombreD }}/{{ nombreD }}.jpg"  }} alt="Card image cap">
                             </div>
                         <!--IMAGEN BASE-->
                     </div>
@@ -54,20 +54,20 @@
                     <div class = "col">
                         <!--DATOS TOMADOS-->
                         <p align="left">
-                            <strong>Edad: </strong> 25 <br>
-                            <strong>Estatura: </strong> 1.77 <br>
-                            <strong>Estado: </strong> Ciudad de Mexico <br>
-                            <strong>Municipio: </strong> Miguel Hidalgo <br>
+                            <strong>Edad: </strong> {{ edadU }}<br>
+                            <strong>Estatura: </strong> {{estaturaU}}<br>
+                            <strong>Estado: </strong> {{estadoU}}<br>
+                            <strong>Municipio: </strong> {{municipioU}}<br>
                         </p>
                     </div>
                     <div class = "col">
                         <!--DATOS BASE-->
                         <p align="left">
-                            <strong>Edad: </strong> {{ edad }} <br>
-                            <strong>Estatura: </strong> 1.72 <br>
-                            <strong>Estado: </strong> Tamaulipas <br>
-                            <strong>Municipio: </strong> Victoria <br>
-                            <strong>Fecha desaparicion: </strong>12/07/2013<br>
+                            <strong>Edad: </strong> {{ edadD }} <br>
+                            <strong>Estatura: </strong> {{estaturaD}} <br>
+                            <strong>Estado: </strong> {{estadoD}} <br>
+                            <strong>Municipio: </strong> {{municipioD}} <br>
+                            <strong>Fecha desaparicion: </strong>{{fechaD}}<br>
                         </p>
                     </div>
                 </div>
