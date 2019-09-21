@@ -39,13 +39,13 @@
                 <div class="row">
                     <div class="col">
                         <div class="card">
-                            <img class="card-img-top" src="img_taken/1.jpg" alt="Card image cap">
+                            <img class="card-img-top" src="{{ url_for('static', filename='Faces/0.jpg') }}" alt="Card image cap">
                         </div>
                         <!--IMAGEN TOMADA-->
                     </div>
                     <div class="col">
                             <div class="card">
-                                <img class="card-img-top" src="static/Imagenes/ALFREDO_ALEJANDRO_BARRIOS_IBARRA/ALFREDO_ALEJANDRO_BARRIOS_IBARRA.jpg" alt="Card image cap">
+                                <img class="card-img-top" src= "{{ url_for('static', filename='Imagenes/')}}{{ nombre }}/{{ nombre }}.jpg"  }} alt="Card image cap">
                             </div>
                         <!--IMAGEN BASE-->
                     </div>

@@ -54,7 +54,7 @@ def imagesend():
 	imgdata = base64.b64decode(data)
 	print('ya')
 
-	filename = 'Faces/' + foto_index + '.jpg'  # I assume you have a way of picking unique filenames
+	filename = 'static/Faces/' + foto_index + '.jpg'  # I assume you have a way of picking unique filenames
 #	with open(filename, 'wb') as f:
 #		f.write(data)
 

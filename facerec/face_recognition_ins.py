@@ -36,8 +36,8 @@ def encuentra_cara():
     #        camera.capture(image, 'bgr')
     #        frame = image.reshape((240, 320, 3))
         print('Faces/' + str(i) + '.jpg')
-        #frame = Image.open('Faces/' + str(i) + '.jpg')
-        frame = cv2.imread('Faces/' + str(i) + '.jpg')
+        #frame = Image.open('static/Faces/' + str(i) + '.jpg')
+        frame = cv2.imread('static/Faces/' + str(i) + '.jpg')
         frame = imutils.resize(frame, width=500)
         # convert the input frame from (1) BGR to grayscale (for face
         # detection) and (2) from BGR to RGB (for face recognition)
