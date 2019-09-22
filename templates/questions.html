@@ -120,7 +120,7 @@
                 </form>
                 <p class="lead">
                     
-                    <input class="btn btn-lg btn-secondary" type="button" onclick="unhide('question2', 'question1'); manda_dato(); " value="Continuar">
+                    <input id = 'manda1' class="btn btn-lg btn-secondary" type="button" onclick="unhide('question2', 'question1'); manda_dato(); " value="Continuar">
                     
                 </p>
             </div>
@@ -132,7 +132,7 @@
                     </div>
                 </form>
                 <p class="lead">
-                        <input class="btn btn-lg btn-secondary" type="button" onclick="unhide('question3', 'question2'); manda_dato2();  " value="Continuar">
+                        <input id= "manda2" class="btn btn-lg btn-secondary" type="button" onclick="unhide('question3', 'question2'); manda_dato2();  " value="Continuar">
                 </p>
             </div>
             <div class = "hidden" id = "question3">
@@ -143,7 +143,7 @@
                     </div>
                 </form>
                 <p class="lead">
-                        <input class="btn btn-lg btn-secondary" type="button" onclick="unhide('question4', 'question3'); manda_dato3(); " value="Continuar">
+                        <input id='manda3' class="btn btn-lg btn-secondary" type="button" onclick="unhide('question4', 'question3'); manda_dato3(); " value="Continuar">
                 </p>
             </div>
             <div class = "hidden" id = "question4">
@@ -160,7 +160,7 @@
                     </div>
                 </form>
                 <p class="lead">
-                  <a href="camara" class="btn btn-lg btn-secondary" onclick="manda_dato4()" >Continuar</a>
+                  <a href="camara" id= "manda4" class="btn btn-lg btn-secondary" onclick="manda_dato4()" >Continuar</a>
                 </p>
             </div>
       </main>
@@ -237,5 +237,32 @@
 <script src=" {{ url_for('static', filename='bootstrap_files/popper.js') }}"></script>
 <script src=" {{ url_for('static', filename='bootstrap_files/bootstrap.js') }}"></script> 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> <!--Obtener js para correrlo local-->
+<script>
+    
+    
+
+    $(document).keypress(function(event) {
+    if (event.keyCode === 13) {
+        if( $("#question1").is(":hidden") == false ){
+            $("#manda1").click();
+        }
+        
+        if( $("#question2").is(":hidden") == false){
+            $("#manda2").click();
+        }
+        
+        if( $("#question3").is(":hidden") == false){
+            $("#manda3").click();
+        }
+        
+        if( $("#question4").is(":hidden") == false){
+            $("#manda4").click();
+        }
+        
+    }
+    });
+    
+    
+</script>
 
 </body></html>
