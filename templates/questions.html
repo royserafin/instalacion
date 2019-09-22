@@ -25,9 +25,87 @@
         </div>
       </header>
 
+   <script> 
+        
+        function manda_dato(){
+            
+            var nombre = $('#NombreInput').val();
+            var apellido = $('#ApellidoInput').val();
+            
+            var url = "/guardadato/" + nombre + '/' + apellido;
+            $.ajax({
+                url: url, 
+                type: "POST", 
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: 'ok'
+                })
+                .done(function(e){
+                    
+                });
+             }
+             
+        function manda_dato2(){
+            
+            var edad = $('#EdadInput').val();
+            
+            
+            var url = "/guardadato2/" + edad;
+            $.ajax({
+                url: url, 
+                type: "POST", 
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: 'ok'
+                })
+                .done(function(e){
+                    
+                });
+             }
+            function manda_dato3(){
+            
+            var edad = $('#EstaturaInput').val();
+            
+            
+            var url = "/guardadato3/" + edad;
+            $.ajax({
+                url: url, 
+                type: "POST", 
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: 'ok'
+                })
+                .done(function(e){
+                    
+                });
+             }
+             
+             function manda_dato4(){
+               var estado = $('#EstadoSelect option:selected').val();
+               var municipio = $('#MunicipioSelect option:selected').val();
+               var url = "/guardadato4/" + estado + '/' + municipio;
+            $.ajax({
+                url: url, 
+                type: "POST", 
+                cache: false,
+                contentType: false,
+                processData: false,
+                data: 'ok'
+                })
+                .done(function(e){
+                    
+                });
+             }
+             
+             
+          
+    </script>
       <main role="main" class="inner cover">
           <div class = "unhidden" id = "question1">
-              <form name="myform" id="myform">
+              <form action = "http://127.0.0.1:500/image-send", method = "POST">
                     <div class="form-group">
                         <label for="NombreInput">Ingresa tu nombre: </label>
                         <input type="text" class="form-control" id="NombreInput" placeholder="Nombre">
@@ -36,10 +114,11 @@
                         <label for="ApellidoInput">Ingresa tu apellido: </label>
                         <input type="text" class="form-control" id="ApellidoInput" placeholder="Nombre">
                     </div>
-
                 </form>
                 <p class="lead">
-                    <input class="btn btn-lg btn-secondary" type="button" onclick="unhide('question2', 'question1') " value="Continuar">
+                    
+                    <input class="btn btn-lg btn-secondary" type="button" onclick="unhide('question2', 'question1'); manda_dato(); " value="Continuar">
+                    
                 </p>
             </div>
             <div class = "hidden" id="question2">
@@ -50,7 +129,7 @@
                     </div>
                 </form>
                 <p class="lead">
-                        <input class="btn btn-lg btn-secondary" type="button" onclick="unhide('question3', 'question2') " value="Continuar">
+                        <input class="btn btn-lg btn-secondary" type="button" onclick="unhide('question3', 'question2'); manda_dato2();  " value="Continuar">
                 </p>
             </div>
             <div class = "hidden" id = "question3">
@@ -61,7 +140,7 @@
                     </div>
                 </form>
                 <p class="lead">
-                        <input class="btn btn-lg btn-secondary" type="button" onclick="unhide('question4', 'question3') " value="Continuar">
+                        <input class="btn btn-lg btn-secondary" type="button" onclick="unhide('question4', 'question3'); manda_dato3(); " value="Continuar">
                 </p>
             </div>
             <div class = "hidden" id = "question4">
@@ -78,7 +157,8 @@
                     </div>
                 </form>
                 <p class="lead">
-                    <a href="camara" class="btn btn-lg btn-secondary">Continuar</a>
+                  <input class="btn btn-lg btn-secondary" type="button" onclick="manda_dato4()" value="Este primero">
+                  <a href="camara" class="btn btn-lg btn-secondary">Continuar</a>
                 </p>
             </div>
       </main>
@@ -100,7 +180,12 @@
         
         
     </script>
-    <script>        
+    <script> 
+        
+
+        
+        
+        
             let requestedData;
             let stateSelect = document.querySelector('[js-state-select]');
             let citySelect = document.querySelector('[js-city-select]');
@@ -149,5 +234,6 @@
 <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
 <script src="static/bootstrap_files/popper.js"></script>
 <script src="static/bootstrap_files/bootstrap.js"></script> 
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> <!--Obtener js para correrlo local-->
 
 </body></html>

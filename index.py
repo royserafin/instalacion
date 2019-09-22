@@ -13,13 +13,12 @@ from PIL import Image
 import numpy as np
 import json
 from numpy import linalg as la
-#import misc
-
+import pandas as pd
 
 
 app = Flask(__name__)
 
-nombre = ''
+
 @app.route('/')
 def hello(name=None):
     return render_template('index.html')
@@ -27,7 +26,56 @@ def hello(name=None):
 @app.route('/questions.html')
 def questions(name=None):
     return render_template('questions.html')
+    
+@app.route('/guardadato/<nombre>/<apellido>', methods = ['POST'])
+def guardadato(nombre, apellido):
+    text_file=open("datos_usuario.txt",'w')
+    n = text_file.write(nombre + '\n')
+    n = text_file.write(apellido + '\n')
+    text_file.close()
+    
+    return jsonify(respuesta='ke pedo puto')
+    
+@app.route('/guardadato2/<edad>', methods = ['POST'])
+def guardadato2(edad):
+    text_file=open("datos_usuario.txt",'a')
+    n = text_file.write(edad + '\n')
+    text_file.close()
+    
+    return jsonify(respuesta='ke pedo puto')
+    
+@app.route('/guardadato3/<estatura>', methods = ['POST'])
+def guardadato3(estatura):
+    text_file=open("datos_usuario.txt",'a')
+    n = text_file.write(estatura + '\n')
+    text_file.close()
+    
+    return jsonify(respuesta='ke pedo puto')
+    
+@app.route('/guardadato4/<estado>/<municipio>', methods = ['POST'])
+def guardadato4(estado, municipio):
+    text_file=open("datos_usuario.txt",'a')
+    n = text_file.write(estado + '\n')
+    n = text_file.write(municipio + '\n')
+    text_file.close()
+    
+    return jsonify(respuesta='Ok')
 
+@app.route('/comotu/<nombre>/<apellido>/<edad>/<estado>/<municipio>')
+def comotu(nombre, apellido, edad, estado, municipio):
+    #print(nombre.split())
+    n1, a1 = nombre.split()
+    #print(nombre,edad,estado,municipio)
+    edad = edad.strip()
+    datos_estadisticas = estadisticas(n1, a1, edad, estado, municipio)
+    #print(datos_estadisticas['nombre'])
+    nombre = datos_estadisticas['nombre']
+    apellido = datos_estadisticas['apellido']
+    edad = datos_estadisticas['edad']
+    estado = datos_estadisticas['estado']
+    municipio = datos_estadisticas['municipio']
+    print(datos_estadisticas)
+    return render_template('comotu.html', nombre = nombre, apellido = apellido, edad = edad, estado=estado, municipio=municipio)
 
 @app.route('/caracara/<nombre>/<nombreD>/<edadD>/<estaturaD>/<estadoD>/<municipioD>/<fechaD>/<nombreU>/<edadU>/<estaturaU>/<estadoU>/<municipioU>')
 def cara(nombre, nombreD, edadD, estaturaD, estadoD, municipioD, fechaD, nombreU, edadU, estaturaU, estadoU, municipioU):
@@ -37,6 +85,22 @@ def cara(nombre, nombreD, edadD, estaturaD, estadoD, municipioD, fechaD, nombreU
     
     # leer txt de usuario actual que contiene nombre datos
     # ya se donde esta guardada la foto de la persona,
+    
+    text_file=open("datos_usuario.txt",'r')
+    n = text_file.readline()
+    n2 = text_file.readline()
+    n = n.upper()
+    n2 = n2.upper()
+    nombreU = n + ' ' + n2
+    edadU = text_file.readline()
+    edadU = edadU.upper()
+    estaturaU = text_file.readline()
+    estaturaU = estaturaU.upper()
+    estadoU = text_file.readline()
+    estadoU = estadoU.upper()
+    municipioU = text_file.readline()
+    municipioU = municipioU.upper()
+    text_file.close()
     return render_template('caracara.html', nombre = nombre, nombreD = nombreD, edadD=edadD, estaturaD = estaturaD, estadoD = estadoD, municipioD = municipioD, fechaD = fechaD, nombreU = nombreU, edadU = edadU, estadoU = estadoU, estaturaU = estaturaU, municipioU =municipioU)
 
 
@@ -50,7 +114,6 @@ def camara(name=None):
 
 @app.route('/image-send', methods = ['POST'])
 def imagesend():
-	
 	#i = request.files['foto'].read()
 	data = request.files['imagen'].read()
 	foto_index = request.form["foto"]
@@ -58,13 +121,14 @@ def imagesend():
 	print('ya')
 	
 	filename = 'static/Faces/' + foto_index + '.jpg'  # I assume you have a way of picking unique filenames
-	with open(filename, 'wb') as f:
-	    f.write(data)
+	#with open(filename, 'wb') as f:
+	#    f.write(data)
 	
 	nombre = fr.encuentra_cara()
 	text_file=open("match_text.txt",'w')
 	n = text_file.write(nombre)
 	text_file.close()
+	
 	datos_desaparecidos = datos_desaparecido(nombre)
 	nombreD =  datos_desaparecidos['nombre']
 	edadD= datos_desaparecidos['edad']
@@ -72,13 +136,14 @@ def imagesend():
 	estadoD = datos_desaparecidos['estado']
 	municipioD = datos_desaparecidos['municipio']
 	fechaD = datos_desaparecidos['fecha']
-	nombreU = "Rodolfo Ocampo Blanco"
-	edadU = "25"
-	estaturaU = "1.74"
-	estadoU = "Ciudad de Mexico"
-	municipioU = "Miguel Hidalgo"
-	#return render_template('index.html')
-	return jsonify(nombre = nombre, nombreD = nombreD, edadD=edadD, estaturaD = estaturaD, estadoD = estadoD, municipioD = municipioD, fechaD = fechaD, nombreU = nombreU, edadU = edadU, estaturaU = estaturaU, estadoU = estadoU, municipioU =municipioU)
+	
+	nombreU = "1"
+	edadU = "2"
+	estaturaU = "3"
+	estadoU = "4"
+	municipioU = "5"
+	
+	return jsonify(nombre = nombre, nombreD = nombreD, edadD=edadD, estaturaD = estaturaD, estadoD = estadoD, municipioD = municipioD, fechaD = fechaD, nombreU = nombreU, edadU = edadU, estaturaU = estaturaU, estadoU = estadoU, municipioU = municipioU)
 	
 #res={'nombre':,'apellido','edad','estatura','estado','municipio'}
 def datos_desaparecido(nombre):
@@ -95,22 +160,22 @@ def datos_desaparecido(nombre):
                    ,'fecha':persona['versiones'][0]['fuerocomun_desapfecha']}
             res['fecha']=res['fecha'].replace('/','-')
             return res
-            
-def recorta_cara(file):
-    detector = cv2.CascadeClassifier('facerec/haarcascade_frontalface_default.xml')    
-    try:
-        img=cv2.imread(file)
-    except:
-        img=cv2.imread(file)
-    #plt.imshow(img)
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    # detect faces in the grayscale frame
-    rects = detector.detectMultiScale(gray, scaleFactor=1.1,
-    minNeighbors=5, minSize=(30, 30),
-        flags=cv2.CASCADE_SCALE_IMAGE)
-    boxes = [(y, x + w, y + h, x) for (x, y, w, h) in rects]
-    (x,y,w,h)=rects[0]
-    #plt.figure()
-    new_img=cv2.resize(img,(200,200))
-    cv2.imwrite(file, new_img)
-    #plt.imshow(new_img[boxes[0][0]-h//4:boxes[0][2]+h//4,boxes[0][3]-w//4:boxes[0][1]+w//4,:])
+
+
+def estadisticas(nombre, apellido, edad, estado, municipio):
+    df3=pd.read_csv('report_12_01_2018_2.csv')
+    res = {
+        'nombre': 0,
+        'apellido': 0,
+        'edad': 0,
+        'estado': 0,
+        'municipio': 0
+        }
+
+    res['nombre'] = df3[(df3['prim_nombre'] == nombre.upper()) | (df3['seg_nombre'] == nombre.upper())].shape[0]
+    res['apellido'] = df3[(df3['apellido_pat'] == apellido.upper()) | (df3['apellido_mat'] == nombre.upper())].shape[0]
+    res['edad'] =df3[df3['fuerocomun_edad'] == edad].shape[0]
+    res['estado'] =df3[df3['fuerocomun_desapentidad'] == estado.upper()].shape[0]
+    res['municipio'] =df3[(df3['fuerocomun_desapentidad'] == estado.upper()) & (df3['fuerocomun_desapmunicipio']) == municipio.upper()].shape[0]
+    #print(res)
+    return res

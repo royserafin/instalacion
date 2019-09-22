@@ -16,7 +16,9 @@
 
     <!-- Custom styles for this template -->
     <link href=" {{ url_for('static', filename='cover.css') }}" rel="stylesheet">
+    
   </head>
+
 
   <body class="text-center" cz-shortcut-listen="true">
 
@@ -25,15 +27,28 @@
         <div class="inner">
         </div>
       </header>
+      <script>
+          function llama_estadisticas() {
+                var nombre = $('#nombreU').text();
+                var edad = $('#edadU').text();
+                
+                var estado = $('#estadoU').text();
+                var municipio = $('#municipioU').text();
+                alert(nombre);
+            
+            
+               window.location = '/comotu/'+nombre +'/cargando/'+edad+'/'+estado+'/'+municipio;
+              }
+      </script>
 
       <main role="main" class="inner cover">
             <div class="container">
                 <div class="row">
                     <div class="col">
-                        <p>{{nombreU}}</p>
+                        <h2 id='nombreU'>{{nombreU}}</h2>
                     </div>
                     <div class="col">
-                        <p> {{ nombreD }} </p>
+                        <h2> {{ nombreD }} </h2>
                     </div>
                 </div>
                 <div class="row">
@@ -54,10 +69,10 @@
                     <div class = "col">
                         <!--DATOS TOMADOS-->
                         <p align="left">
-                            <strong>Edad: </strong> {{ edadU }}<br>
-                            <strong>Estatura: </strong> {{estaturaU}}<br>
-                            <strong>Estado: </strong> {{estadoU}}<br>
-                            <strong>Municipio: </strong> {{municipioU}}<br>
+                          <strong>Edad: </strong> <p id='edadU'> {{ edadU }}<br></p>
+                            <strong>Estatura: </strong> <p id='estaturaU'>{{estaturaU}}<br></p>
+                            <strong>Estado: </strong> <p id='estadoU'>{{estadoU}}<br></p>
+                            <strong>Municipio: </strong> <p id='municipioU'>{{municipioU}}<br></p>
                         </p>
                     </div>
                     <div class = "col">
@@ -67,13 +82,17 @@
                             <strong>Estatura: </strong> {{estaturaD}} <br>
                             <strong>Estado: </strong> {{estadoD}} <br>
                             <strong>Municipio: </strong> {{municipioD}} <br>
-                            <strong>Fecha desaparicion: </strong>{{fechaD}}<br>
                         </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class = "col">
+                        <h3><strong>Fecha desaparicion: </strong>{{fechaD}}<br></h3>
                     </div>
                 </div>
             </div>
         <p class="lead">
-          <a href="comotu.html" class="btn btn-lg btn-secondary">Continuar</a>
+          <a class="btn btn-lg btn-secondary" onclick="llama_estadisticas()" >Continuar</a>
         </p>
       </main>
 
@@ -83,20 +102,7 @@
         </div> -->
       </footer>
     </div>
-<script>
-    $.ajax({
-                url: url, 
-                type: "POST", 
-                cache: false,
-                contentType: false,
-                processData: false,
-                data: formData})
-                .done(function(e){
-                    alert(e.result);
-                    window.location.href = 'caracara';
-                });
-             }
-</script>
+
 
 
     <!-- Bootstrap core JavaScript
