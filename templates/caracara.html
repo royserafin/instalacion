@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="BrunoSLopezF">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
      <!--<link rel="icon" href="https://getbootstrap.com/docs/4.0/assets/img/favicons/favicon.ico"> Poner logo datalab!!-->
 
     <title>Un ejercicio de conciencia</title>
@@ -29,15 +32,11 @@
       </header>
       <script>
           function llama_estadisticas() {
-                var nombre = $('#nombreU').text();
-                var edad = $('#edadU').text();
-                
-                var estado = $('#estadoU').text();
-                var municipio = $('#municipioU').text();
-                alert(nombre);
-            
-            
-               window.location = '/comotu/'+nombre +'/cargando/'+edad+'/'+estado+'/'+municipio;
+              var nombre = $('#nombreU').text();
+              var edad = $('#edadU').text();
+              var estado = $('#estadoU').text();
+              var municipio = $('#municipioU').text();
+              window.location = '/comotu/'+nombre +'/cargando/'+edad+'/'+estado+'/'+municipio;
               }
       </script>
 
@@ -69,19 +68,19 @@
                     <div class = "col">
                         <!--DATOS TOMADOS-->
                         <p align="left">
-                          <strong>Edad: </strong> <p id='edadU'> {{ edadU }}<br></p>
-                            <strong>Estatura: </strong> <p id='estaturaU'>{{estaturaU}}<br></p>
-                            <strong>Estado: </strong> <p id='estadoU'>{{estadoU}}<br></p>
-                            <strong>Municipio: </strong> <p id='municipioU'>{{municipioU}}<br></p>
+                            <strong>Edad: </strong> <label id='edadU'> {{ edadU }}</label><br>
+                            <strong>Estatura: </strong> <label id='estaturaU'>{{estaturaU}}</label><br>
+                            <strong>Estado: </strong> <label id='estadoU'>{{estadoU}}</label><br>
+                            <strong>Municipio: </strong> <label id='municipioU'>{{municipioU}}</label><br>
                         </p>
                     </div>
                     <div class = "col">
                         <!--DATOS BASE-->
                         <p align="left">
-                            <strong>Edad: </strong> {{ edadD }} <br>
-                            <strong>Estatura: </strong> {{estaturaD}} <br>
-                            <strong>Estado: </strong> {{estadoD}} <br>
-                            <strong>Municipio: </strong> {{municipioD}} <br>
+                            <strong>Edad: </strong> <label>{{ edadD }} </label><br>
+                            <strong>Estatura: </strong> <label>{{estaturaD}} </label><br>
+                            <strong>Estado: </strong><label>{{estadoD}}</label><br>
+                            <strong>Municipio: </strong><label>{{municipioD}} </label><br>
                         </p>
                     </div>
                 </div>
@@ -92,7 +91,7 @@
                 </div>
             </div>
         <p class="lead">
-          <a class="btn btn-lg btn-secondary" onclick="llama_estadisticas()" >Continuar</a>
+          <a onclick="llama_estadisticas()" class="btn btn-lg btn-secondary">Continuar</a>
         </p>
       </main>
 

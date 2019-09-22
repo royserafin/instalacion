@@ -1,63 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>facedetector - detecting/tracking faces</title>
-    <style>
-    body {
-      margin: 0;
-      padding: 0;
-      width: 100vw;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: #333
-    }
-    canvas {
-      position: absolute;
-    }
-    #myProgress {
-  width: 100%;
-  background-color: #ddd;
-  position:absolute;
-  left:0px;
-  top:0px;
-  float:left;
-    }
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="BrunoSLopezF">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+     <!--<link rel="icon" href="https://getbootstrap.com/docs/4.0/assets/img/favicons/favicon.ico"> Poner logo datalab!!-->
 
-    #myBar {
-      width: 1%;
-      height: 20px;
-      background-color: #4CAF50;
-    }
-    
-    
-  </style>
-</head>
+    <title>Un ejercicio de conciencia</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/cover/">
+
+    <!-- Bootstrap core CSS -->
+    <link href=" {{ url_for('static', filename='bootstrap_files/bootstrap.css') }} " rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href=" {{ url_for('static', filename='cover.css') }}" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #333
+            }
+        canvas {
+            position: absolute;
+            }
+        #myProgress {
+            width: 100%;
+            background-color: #ddd;
+            position:absolute;
+            left:0px;
+            top:0px;
+            float:left;
+            }
+        #myBar {
+            width: 1%;
+            height: 20px;
+            background-color: #4CAF50;
+            }
+        </style>
+        </head>
 
 <body onload="">
-
- <p class="lead">
-          <a onclick="move(); take_photo()" class="btn btn-lg btn-secondary">Continuar</a>
+<div class = "container">
+    <div class = "row">
+        <!-- Aqui metemos la cámara  --> 
+        <video id="video" autoplay
+        style="width: 640px; height: 640px; border: 1px solid black;"></video>
+        <canvas id="canvas" ></canvas>
+        <canvas id="imagen" style="display:none" width="640" height="640"></canvas>
+        <img id="photo" style="visibility: hidden; display: none" src=""></img>
+    </div>
+    <div class = "row">
+        <!-- Aquí metemos el botón -->
+        <p class="lead" align = "center">
+            <a class="btn btn-lg btn-secondary" onclick="move(); take_photo()">Tomar Foto</a>
         </p>
-
-<video id="video" autoplay
-       style="width: 640px; height: 640px; border: 1px solid black;"></video>
-<canvas id="canvas" ></canvas>
-
-<canvas id="imagen" style="display:none" width="640" height="640"></canvas>
-<img id="photo" style="visibility: hidden; display: none" src=""></img>
+    </div>
+</div>
 
 <div id="myProgress">
   <div id="myBar"></div>
 </div>
-
-
-<script src="static/bootstrap_files/jquery-3.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-<script src="static/bootstrap_files/popper.js"></script> <!--Cambiar a url for static -->
-<script src="static/bootstrap_files/bootstrap.js"></script> <!-- Cambiar a url for static -->
 
 <script src="{{ url_for('static', filename='js/FaceDetector.js') }}"></script>
 <script src="{{ url_for('static', filename='js/WebcamManager.js') }}"></script>
@@ -219,5 +232,13 @@
     webcamMgr.startCamera();
 
 </script>
+<!-- Bootstrap core JavaScript
+    ================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src=" {{ url_for('static', filename='bootstrap_files/jquery-3.js') }}" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+<script src=" {{ url_for('static', filename='bootstrap_files/popper.js') }}"></script>
+<script src=" {{ url_for('static', filename='bootstrap_files/bootstrap.js') }}"></script> 
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 </body>
 </html>

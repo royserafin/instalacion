@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="BrunoSLopezF">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
      <!--<link rel="icon" href="https://getbootstrap.com/docs/4.0/assets/img/favicons/favicon.ico"> Poner logo datalab!!-->
 
     <title>Un ejercicio de conciencia</title>
@@ -12,10 +15,10 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/cover/">
 
     <!-- Bootstrap core CSS -->
-    <link href="bootstrap_files/bootstrap.css" rel="stylesheet">
+    <link href=" {{ url_for('static', filename='bootstrap_files/bootstrap.css') }} " rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="cover.css" rel="stylesheet">
+    <link href=" {{ url_for('static', filename='cover.css') }}" rel="stylesheet">
   </head>
 
   <body class="text-center" cz-shortcut-listen="true">
@@ -27,10 +30,24 @@
       </header>
 
       <main role="main" class="inner cover">
-        <h2>Mensaje chingon</h2>
-        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
         <p class="lead">
-          <a href="#" class="btn btn-lg btn-secondary">Continuar</a>
+          Cada día <strong>9</strong> caras nuevas se agregan a esta base de datos.
+        </p>
+        <p class = "lead">
+          Cada día la probabilidad de encontrar a un familiar o amigo en este ejercicio, <strong>aumenta</strong>.
+        </p>
+        <p class = "lead">
+          Cada día, los familiares de más de <strong>40,000</strong>personas desaparecidas buscan a los suyos en este país de fosas.
+        </p>
+        <p class = "lead">
+          Nos faltan 43 <br>
+          Nos faltan 40,000 <br>
+          Nos falta <strong>verdad</strong>,
+              <strong>empatía</strong>
+          y <strong>acción</strong>.
+        </p>
+        <p class="lead">
+          <a href="/" class="btn btn-lg btn-secondary">Continuar</a>
         </p>
       </main>
 
@@ -45,10 +62,8 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="bootstrap_files/jquery-3.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src=" {{ url_for('static', filename='bootstrap_files/jquery-3.js') }}" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-<script src="bootstrap_files/popper.js"></script>
-<script src="bootstrap_files/bootstrap.js"></script>
-  
-
+<script src=" {{ url_for('static', filename='bootstrap_files/popper.js') }}"></script>
+<script src=" {{ url_for('static', filename='bootstrap_files/bootstrap.js') }}"></script> 
 </body></html>

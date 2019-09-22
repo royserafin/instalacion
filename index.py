@@ -26,6 +26,10 @@ def hello(name=None):
 @app.route('/questions.html')
 def questions(name=None):
     return render_template('questions.html')
+
+@app.route('/message.html')
+def message(name=None):
+    return render_template('message.html')
     
 @app.route('/guardadato/<nombre>/<apellido>', methods = ['POST'])
 def guardadato(nombre, apellido):
@@ -74,7 +78,7 @@ def comotu(nombre, apellido, edad, estado, municipio):
     edad = datos_estadisticas['edad']
     estado = datos_estadisticas['estado']
     municipio = datos_estadisticas['municipio']
-    print(datos_estadisticas)
+    #print(datos_estadisticas)
     return render_template('comotu.html', nombre = nombre, apellido = apellido, edad = edad, estado=estado, municipio=municipio)
 
 @app.route('/caracara/<nombre>/<nombreD>/<edadD>/<estaturaD>/<estadoD>/<municipioD>/<fechaD>/<nombreU>/<edadU>/<estaturaU>/<estadoU>/<municipioU>')
@@ -103,14 +107,21 @@ def cara(nombre, nombreD, edadD, estaturaD, estadoD, municipioD, fechaD, nombreU
     text_file.close()
     return render_template('caracara.html', nombre = nombre, nombreD = nombreD, edadD=edadD, estaturaD = estaturaD, estadoD = estadoD, municipioD = municipioD, fechaD = fechaD, nombreU = nombreU, edadU = edadU, estadoU = estadoU, estaturaU = estaturaU, municipioU =municipioU)
 
-
-@app.route('/message.html')
-def message(name=None):
-    return render_template('message.html')
-
 @app.route('/camara')
 def camara(name=None):
     return render_template('facedetector/example/camara.html')
+    
+@app.after_request
+def add_header(r):
+    """
+    Add headers to both force latest IE rendering engine or Chrome Frame,
+    and also to cache the rendered page for 10 minutes.
+    """
+    r.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    r.headers["Pragma"] = "no-cache"
+    r.headers["Expires"] = "0"
+    r.headers['Cache-Control'] = 'public, max-age=0'
+    return r
 
 @app.route('/image-send', methods = ['POST'])
 def imagesend():
@@ -121,8 +132,8 @@ def imagesend():
 	print('ya')
 	
 	filename = 'static/Faces/' + foto_index + '.jpg'  # I assume you have a way of picking unique filenames
-	#with open(filename, 'wb') as f:
-	#    f.write(data)
+	with open(filename, 'wb') as f:
+	    f.write(data)
 	
 	nombre = fr.encuentra_cara()
 	text_file=open("match_text.txt",'w')
@@ -161,9 +172,25 @@ def datos_desaparecido(nombre):
             res['fecha']=res['fecha'].replace('/','-')
             return res
 
+def acentos(cad):
+    cad = cad.replace("á", "a")
+    cad = cad.replace("é", "e")
+    cad = cad.replace("í", "i")
+    cad = cad.replace("ó", "o")
+    cad = cad.replace("ú", "u")
+    cad = cad.replace("Á","A")
+    cad = cad.replace("É","E")
+    cad = cad.replace("Í","I")
+    cad = cad.replace("Ó","O")
+    cad = cad.replace("Ú","U")
+    return cad
 
 def estadisticas(nombre, apellido, edad, estado, municipio):
     df3=pd.read_csv('report_12_01_2018_2.csv')
+    nombre = acentos(nombre)
+    apellido = acentos(apellido)
+    estado = acentos(estado)
+    municipio = acentos(municipio)
     res = {
         'nombre': 0,
         'apellido': 0,
@@ -176,6 +203,6 @@ def estadisticas(nombre, apellido, edad, estado, municipio):
     res['apellido'] = df3[(df3['apellido_pat'] == apellido.upper()) | (df3['apellido_mat'] == nombre.upper())].shape[0]
     res['edad'] =df3[df3['fuerocomun_edad'] == edad].shape[0]
     res['estado'] =df3[df3['fuerocomun_desapentidad'] == estado.upper()].shape[0]
-    res['municipio'] =df3[(df3['fuerocomun_desapentidad'] == estado.upper()) & (df3['fuerocomun_desapmunicipio']) == municipio.upper()].shape[0]
-    #print(res)
+    res['municipio'] =df3[(df3['fuerocomun_desapentidad'] == estado.upper()) & (df3['fuerocomun_desapmunicipio'] == municipio.upper())].shape[0]
+
     return res
