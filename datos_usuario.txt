@@ -1,16 +1,6 @@
 Rodolfo
 Ocampo
 25
-1.73
-Chiapas
-Cacahoatán
-Aguascalientes
-Municipio
-Aguascalientes
-Municipio
-Aguascalientes
-Municipio
-Aguascalientes
-Municipio
-Aguascalientes
-Municipio
+1.72
+Baja California
+Ensenada

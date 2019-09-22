@@ -65,21 +65,21 @@ def guardadato4(estado, municipio):
     
     return jsonify(respuesta='Ok')
 
-@app.route('/comotu/<nombre>/<apellido>/<edad>/<estado>/<municipio>')
-def comotu(nombre, apellido, edad, estado, municipio):
+@app.route('/comotu/<nombre>/<apellido>/<edad>/<estado>/<municipio>/<nombre_stats>/<apellido_stats>/<edad_stats>/<estado_stats>/<municipio_stats>')
+def comotu(nombre, apellido, edad, estado, municipio, nombre_stats, apellido_stats, edad_stats, estado_stats, municipio_stats):              
     #print(nombre.split())
-    n1, a1 = nombre.split()
+    nombre, apellido = nombre.split()
     #print(nombre,edad,estado,municipio)
     edad = edad.strip()
-    datos_estadisticas = estadisticas(n1, a1, edad, estado, municipio)
+    datos_estadisticas = estadisticas(nombre, apellido, edad, estado, municipio)
     #print(datos_estadisticas['nombre'])
-    nombre = datos_estadisticas['nombre']
-    apellido = datos_estadisticas['apellido']
-    edad = datos_estadisticas['edad']
-    estado = datos_estadisticas['estado']
-    municipio = datos_estadisticas['municipio']
+    nombre_stats = datos_estadisticas['nombre']
+    apellido_stats = datos_estadisticas['apellido']
+    edad_stats = datos_estadisticas['edad']
+    estado_stats = datos_estadisticas['estado']
+    municipio_stats = datos_estadisticas['municipio']
     #print(datos_estadisticas)
-    return render_template('comotu.html', nombre = nombre, apellido = apellido, edad = edad, estado=estado, municipio=municipio)
+    return render_template('comotu.html', nombre = nombre, apellido = apellido, edad = edad, estado=estado, municipio=municipio, nombre_stats = nombre_stats, apellido_stats = apellido_stats, edad_stats = edad_stats, estado_stats = estado_stats, municipio_stats = municipio_stats)
 
 @app.route('/caracara/<nombre>/<nombreD>/<edadD>/<estaturaD>/<estadoD>/<municipioD>/<fechaD>/<nombreU>/<edadU>/<estaturaU>/<estadoU>/<municipioU>')
 def cara(nombre, nombreD, edadD, estaturaD, estadoD, municipioD, fechaD, nombreU, edadU, estaturaU, estadoU, municipioU):
