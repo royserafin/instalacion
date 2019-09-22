@@ -21,16 +21,6 @@
     <!-- Custom styles for this template -->
     <link href=" {{ url_for('static', filename='cover.css') }}" rel="stylesheet">
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            width: 100vw;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: #333
-            }
         canvas {
             position: absolute;
             }
@@ -63,7 +53,7 @@
     <div class = "row">
         <!-- Aquí metemos el botón -->
         <p class="lead" align = "center">
-            <a class="btn btn-lg btn-secondary" onclick="move(); take_photo()">Tomar Foto</a>
+            <a href = "#" id="foto" class="btn btn-lg btn-secondary">Tomar Foto</a>
         </p>
     </div>
 </div>
@@ -77,6 +67,14 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> <!--Obtener js para correrlo local-->
 
 <script>
+    $(document).ready(function(){
+        $('#foto').click(function() {
+            take_photo();
+            move();
+            });
+        });
+        
+        
 
         function base64ToBlob(base64, mime) 
         {
