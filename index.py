@@ -123,8 +123,8 @@ def imagesend():
 	#i = request.files['foto'].read()
 	data = request.files['imagen'].read()
 	foto_index = request.form["foto"]
-	imgdata = base64.b64decode(data)
-	print('ya')
+	
+	
 	
 	filename = 'static/Faces/' + foto_index + '.jpg'  # I assume you have a way of picking unique filenames
 	#with open(filename, 'wb') as f:
@@ -137,10 +137,22 @@ def imagesend():
 	
 	datos_desaparecidos = datos_desaparecido(nombre)
 	nombreD =  datos_desaparecidos['nombre']
+	if (nombreD == ''):
+	    nombreD = 'Desconocido'
 	edadD= datos_desaparecidos['edad']
+	if (edadD == ''):
+	    edadD = 'Desconocido'
 	estadoD = datos_desaparecidos['estado']
+	if (estadoD == ''):
+	    estadoD = 'Desconocido'
 	municipioD = datos_desaparecidos['municipio']
+	if (municipioD == ''):
+	    municipioD = 'Desconocido'
 	fechaD = datos_desaparecidos['fecha']
+	if (fechaD == ''):
+	    fechaD = 'Desconocido'
+	
+	
 	
 	nombreU = "1"
 	edadU = "2"
@@ -150,10 +162,22 @@ def imagesend():
 	return jsonify(nombre = nombre, nombreD = nombreD, edadD=edadD, estadoD = estadoD, municipioD = municipioD, fechaD = fechaD, nombreU = nombreU, edadU = edadU, estadoU = estadoU, municipioU = municipioU)
 	
 def datos_desaparecido(nombre):
-    with open('personasdesaparecidas.json','r',encoding='utf8') as f:
+    with open('base_de_fotos.json','r',encoding='utf8') as f:
         datastore=json.load(f)
     for persona in datastore:
-        file=f"{persona['versiones'][0]['prim_nombre']}_{persona['versiones'][0]['seg_nombre']}_{persona['versiones'][0]['apellido_pat']}_{persona['versiones'][0]['apellido_mat']}"
+        if (nombre[len(nombre)-3:]=='___'):
+            hold = persona['versiones'][0]['prim_nombre']
+            if (hold[len(hold)-1:]==' '):
+                hold = hold[:-1:]
+                file=f"{hold}___"
+            else:
+                file=f"{persona['versiones'][0]['prim_nombre']}___"
+            if (hold[len(hold)-4:]==' '):
+                index = len(hold)-4
+                hold = hold[0:index:] + hold[index + 1 : :]
+                persona['versiones'][0]['prim_nombre'] = hold
+        else:
+            file=f"{persona['versiones'][0]['prim_nombre']}_{persona['versiones'][0]['seg_nombre']}_{persona['versiones'][0]['apellido_pat']}_{persona['versiones'][0]['apellido_mat']}"
         if(file==nombre):
             res={'nombre':f"{persona['versiones'][0]['prim_nombre']} {persona['versiones'][0]['seg_nombre']} {persona['versiones'][0]['apellido_pat']} {persona['versiones'][0]['apellido_mat']}"
                    ,'edad':persona['versiones'][0]['fuerocomun_edad']
