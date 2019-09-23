@@ -19,6 +19,14 @@ a:hover {
   border: .05rem solid #fff;
 }
 
+.btn-tertiary,
+.btn-tertiary:hover,
+.btn-tertiary:focus {
+  color: #fff;
+  text-shadow: none; /* Prevent inheritance from `body` */
+  background-color: #333;
+  border: .05rem solid #333;
+}
 
 /*
  * Base structure
@@ -43,7 +51,7 @@ body {
 }
 
 .cover-container {
-  max-width: 42em;
+  max-width: 80%;
 }
 
 
@@ -108,11 +116,30 @@ body {
 .mastfoot {
   color: rgba(255, 255, 255, .5);
 }
-
+/*
+ * Attributes to make the div appear and dissapear
+ */
 div.hidden{
   display:none;
 }
 
 div.unhidden{
   display:block;
+}
+.vertical-center {
+  min-height: 100%;
+  min-height: 100vh;
+  display:flex;
+  align-items: center;
+}
+
+div.l{
+  text-align:left;
+}
+div.c{
+  text-align:center;
+}
+p.message{
+  font-size: 195%;
+  color:#241F1C;
 }

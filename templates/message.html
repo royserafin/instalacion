@@ -19,36 +19,44 @@
 
     <!-- Custom styles for this template -->
     <link href=" {{ url_for('static', filename='cover.css') }}" rel="stylesheet">
+    <!---
+    <script>
+      window.onload = function(){
+        var body = document.getElementbyTagName("body");
+        body.style.backgroundColor = "#F2F2F2";
+      }
+    </script>
+    --->
   </head>
 
-  <body class="text-center" cz-shortcut-listen="true">
-
+  <body class="text-center" cz-shortcut-listen="true" style = "background-color:white;" style = "font-size: 160%;">
     <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
       <header class="masthead mb-auto">
         <div class="inner">
         </div>
       </header>
-
       <main role="main" class="inner cover">
-        <p class="lead">
-          Cada día <strong>9</strong> caras nuevas se agregan a esta base de datos.
-        </p>
-        <p class = "lead">
-          Cada día la probabilidad de encontrar a un familiar o amigo en este ejercicio, <strong>aumenta</strong>.
-        </p>
-        <p class = "lead">
-          Cada día, los familiares de más de <strong>40,000</strong>personas desaparecidas buscan a los suyos en este país de fosas.
-        </p>
-        <p class = "lead">
-          Nos faltan 43 <br>
-          Nos faltan 40,000 <br>
-          Nos falta <strong>verdad</strong>,
-              <strong>empatía</strong>
-          y <strong>acción</strong>.
-        </p>
-        <p class="lead">
-          <a href="/" class="btn btn-lg btn-secondary">Terminar</a>
-        </p>
+        <div class = "container">
+          <div class = "row l">
+            <p class = "message">
+              Cada día <span style = "color:#C32B3D"><strong>9</strong></span> caras nuevas se agregan a esta base de datos.<br>
+              Cada día la probabilidad de encontrar a un familiar o amigo en este ejercicio, <span style = "color:#C32B3D"><strong>aumenta</strong></span>.<br>
+              Cada día, los familiares de más de <span style = "color:#C32B3D"><strong>40,000</strong></span> personas desaparecidas buscan a los suyos en este país de fosas.<br>
+              Nos faltan <strong>43</strong><br>
+              Nos faltan <strong>40,000</strong><br>
+              Nos falta <span style = "color:#C32B3D"><strong>verdad</strong></span>,<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style = "color:#C32B3D"><strong>empatía</strong></span><br>
+              &nbsp;&nbsp;y <span style = "color:#C32B3D"><strong>acción</strong></span>.<br>
+            </p>
+          </div>
+          <div class = "row">
+              <div class = "col">
+                <p class="lead">
+                  <a href = "/" class="btn btn-lg btn-tertiary">Continuar</a>
+                </p>
+              </div>
+          </div>
+        </div>
       </main>
 
       <footer class="mastfoot mt-auto">

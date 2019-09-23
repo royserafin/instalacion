@@ -21,7 +21,7 @@
     <link href=" {{ url_for('static', filename='cover.css') }}" rel="stylesheet">
   </head>
 
-  <body class="text-center" cz-shortcut-listen="true">
+  <body class="text-center" cz-shortcut-listen="true" style = "font-size: 160%;">
 
     <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
       <header class="masthead mb-auto">
@@ -30,12 +30,31 @@
       </header>
 
       <main role="main" class="inner cover">
-          <h2>Más personas como tú</h2>
-        <p class="lead">En esta base de personas desaparecidas hay {{nombre_stats}} personas que también se llaman {{nombre}}, {{apellido_stats}} que se apellidan {{apellido}}, {{edad_stats}} de {{edad}} años, {{estado_stats}} de {{estado}} y {{municipio_stats}} de {{municipio}}.</p>
         <div class = "container">
-            <p class = "lead">
-                <a href = "/message.html" class="btn btn-lg btn-secondary">Continuar</a>
-            </p>
+            <div class = "unhidden" id="text1">
+                <p style = "font-size: 165%; " align = "left">
+                    En esta base de personas desaparecidas hay <strong>{{nombre_stats}}</strong> personas que también se llaman {{nombre}} y <strong>{{apellido_stats}}</strong> que se apellidan {{apellido}}, <i> como tú</i>.
+                </p>
+                <p class = "lead">
+                    <input class = "btn btn-lg btn-secondary" type="button" onclick="unhide('text2','text1')" value = "Continuar">
+                </p>
+            </div>
+            <div class = "hidden" id = "text2">
+                <p style = "font-size: 165%; " align = "left">
+                    En esta base de personas desaparecidas hay <strong>{{edad_stats}}</strong> que, <i>como tú</i>, tienen {{edad}} años.
+                </p>
+                <p class = "lead">
+                    <input class = "btn btn-lg btn-secondary" type="button" onclick="unhide('text3','text2')" value = "Continuar">
+                </p>
+            </div>
+            <div class = "hidden" id = "text3">
+                <p style = "font-size: 165%; " align = "left">
+                    En esta base de personas desaparecidas hay <strong>{{estado_stats}}</strong> personas que también son de {{estado}} y <strong>{{municipio_stats}}</strong> que son de {{municipio}}, <i> como tú</i>.
+                </p>
+                <p class="lead">
+                    <a href="/message.html" class="btn btn-lg btn-secondary">Continuar</a>
+                </p>
+            </div>
         </div>
       </main>
 
@@ -45,6 +64,15 @@
         </div> -->
       </footer>
     </div>
+    <script type="text/javascript">
+        function unhide(divID, otherDivId) {
+            var item = document.getElementById(divID);
+            if (item) {
+                item.className=(item.className=='hidden')?'unhidden':'hidden';
+            }
+            document.getElementById(otherDivId).className = 'hidden';
+        }       
+    </script>
 
 
     <!-- Bootstrap core JavaScript

@@ -20,7 +20,7 @@
     <link href=" {{ url_for('static', filename='cover.css') }}" rel="stylesheet">
   </head>
 
-  <body class="text-center" cz-shortcut-listen="true">
+  <body class="text-center" cz-shortcut-listen="true" style = "font-size: 160%;">
 
     <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
       <header class="masthead mb-auto">
@@ -132,7 +132,7 @@
                     </div>
                 </form>
                 <p class="lead">
-                        <input id= "manda2" class="btn btn-lg btn-secondary" type="button" onclick="unhide('question3', 'question2'); manda_dato2();  " value="Continuar">
+                        <input id= "manda2" class="btn btn-lg btn-secondary" type="button" onclick="unhide('question4', 'question2'); manda_dato2();  " value="Continuar">
                 </p>
             </div>
             <div class = "hidden" id = "question3">
@@ -143,17 +143,17 @@
                     </div>
                 </form>
                 <p class="lead">
-                        <input id='manda3' class="btn btn-lg btn-secondary" type="button" onclick="unhide('question4', 'question3'); manda_dato3(); " value="Continuar">
+                        <!--<input id='manda3' class="btn btn-lg btn-secondary" type="button" onclick="unhide('question4', 'question3'); manda_dato3(); " value="Continuar">-->
                 </p>
             </div>
             <div class = "hidden" id = "question4">
                 <form>
                     <div class="form-group">
-                        <label for="EstadoSelect">Selecciona tu Estado:</label>
+                        <label for="EstadoSelect">Selecciona tu estado:</label>
                         <select js-state-select class="form-control" id="EstadoSelect" placeholder="Estado"></select>
                     </div>
                     <div class="form-group">
-                        <label for="MunicipioSelect">Selecciona el municipio: </label>
+                        <label for="MunicipioSelect">Selecciona tu municipio: </label>
                         <select js-city-select class="form-control" id="MunicipioSelect" placeholder="Municipio">
                             <option>Municipio</option>
                         </select>
@@ -178,16 +178,9 @@
                 item.className=(item.className=='hidden')?'unhidden':'hidden';
             }
             document.getElementById(otherDivId).className = 'hidden';
-        }
-        
-        
+        }        
     </script>
-    <script> 
-        
-
-        
-        
-        
+    <script>         
             let requestedData;
             let stateSelect = document.querySelector('[js-state-select]');
             let citySelect = document.querySelector('[js-city-select]');
@@ -264,5 +257,4 @@
     
     
 </script>
-
 </body></html>

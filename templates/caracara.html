@@ -23,7 +23,7 @@
   </head>
 
 
-  <body class="text-center" cz-shortcut-listen="true">
+  <body class="text-center" cz-shortcut-listen="true" style = "font-size: 160%;">
 
     <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
       <header class="masthead mb-auto">
@@ -68,8 +68,8 @@
                     <div class = "col">
                         <!--DATOS TOMADOS-->
                         <p align="left">
+                            <label> </label><br>
                             <strong>Edad: </strong> <label id='edadU'> {{ edadU }}</label><br>
-                            <strong>Estatura: </strong> <label id='estaturaU'>{{estaturaU}}</label><br>
                             <strong>Estado: </strong> <label id='estadoU'>{{estadoU}}</label><br>
                             <strong>Municipio: </strong> <label id='municipioU'>{{municipioU}}</label><br>
                         </p>
@@ -77,8 +77,8 @@
                     <div class = "col">
                         <!--DATOS BASE-->
                         <p align="left">
+                            <label> </label><br>
                             <strong>Edad: </strong> <label>{{ edadD }} </label><br>
-                            <strong>Estatura: </strong> <label>{{estaturaD}} </label><br>
                             <strong>Estado: </strong><label>{{estadoD}}</label><br>
                             <strong>Municipio: </strong><label>{{municipioD}} </label><br>
                         </p>
@@ -86,13 +86,24 @@
                 </div>
                 <div class="row">
                     <div class = "col">
-                        <h3><strong>Fecha desaparicion: </strong>{{fechaD}}<br></h3>
+                        <h3><strong>Fecha de desaparición: </strong>{{fechaD}}<br></h3>
+                    </div>
+                </div>
+                <div class = "row">
+                    <div class = "col">
+                        <p class="lead">
+                             
+                        </p>
+                    </div>
+                </div>
+                <div class = "row">
+                    <div class = "col">
+                        <p class="lead">
+                            <a href = "#" onclick="llama_estadisticas()" class="btn btn-lg btn-secondary">Continuar</a>
+                        </p>
                     </div>
                 </div>
             </div>
-        <p class="lead">
-          <a href = "#" onclick="llama_estadisticas()" class="btn btn-lg btn-secondary">Continuar</a>
-        </p>
       </main>
 
       <footer class="mastfoot mt-auto">

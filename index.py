@@ -48,14 +48,6 @@ def guardadato2(edad):
     
     return jsonify(respuesta='ke pedo puto')
     
-@app.route('/guardadato3/<estatura>', methods = ['POST'])
-def guardadato3(estatura):
-    text_file=open("datos_usuario.txt",'a')
-    n = text_file.write(estatura + '\n')
-    text_file.close()
-    
-    return jsonify(respuesta='ke pedo puto')
-    
 @app.route('/guardadato4/<estado>/<municipio>', methods = ['POST'])
 def guardadato4(estado, municipio):
     text_file=open("datos_usuario.txt",'a')
@@ -71,6 +63,11 @@ def comotu(nombre, apellido, edad, estado, municipio, nombre_stats, apellido_sta
     nombre, apellido = nombre.split()
     #print(nombre,edad,estado,municipio)
     edad = edad.strip()
+    nombre = nombre.capitalize()
+    apellido = apellido.capitalize()
+    estado = estado.capitalize()
+    municipio = municipio.capitalize()
+    
     datos_estadisticas = estadisticas(nombre, apellido, edad, estado, municipio)
     #print(datos_estadisticas['nombre'])
     nombre_stats = datos_estadisticas['nombre']
@@ -81,8 +78,8 @@ def comotu(nombre, apellido, edad, estado, municipio, nombre_stats, apellido_sta
     #print(datos_estadisticas)
     return render_template('comotu.html', nombre = nombre, apellido = apellido, edad = edad, estado=estado, municipio=municipio, nombre_stats = nombre_stats, apellido_stats = apellido_stats, edad_stats = edad_stats, estado_stats = estado_stats, municipio_stats = municipio_stats)
 
-@app.route('/caracara/<nombre>/<nombreD>/<edadD>/<estaturaD>/<estadoD>/<municipioD>/<fechaD>/<nombreU>/<edadU>/<estaturaU>/<estadoU>/<municipioU>')
-def cara(nombre, nombreD, edadD, estaturaD, estadoD, municipioD, fechaD, nombreU, edadU, estaturaU, estadoU, municipioU):
+@app.route('/caracara/<nombre>/<nombreD>/<edadD>/<estadoD>/<municipioD>/<fechaD>/<nombreU>/<edadU>/<estadoU>/<municipioU>')
+def cara(nombre, nombreD, edadD, estadoD, municipioD, fechaD, nombreU, edadU, estadoU, municipioU):
     # leer el txt o name
     # buscar en el json el nombre y obtener sus datos
     # enviar eso por post a javascript
@@ -97,15 +94,13 @@ def cara(nombre, nombreD, edadD, estaturaD, estadoD, municipioD, fechaD, nombreU
     n2 = n2.upper()
     nombreU = n + ' ' + n2
     edadU = text_file.readline()
-    edadU = edadU.upper()
-    estaturaU = text_file.readline()
-    estaturaU = estaturaU.upper()
     estadoU = text_file.readline()
     estadoU = estadoU.upper()
     municipioU = text_file.readline()
     municipioU = municipioU.upper()
     text_file.close()
-    return render_template('caracara.html', nombre = nombre, nombreD = nombreD, edadD=edadD, estaturaD = estaturaD, estadoD = estadoD, municipioD = municipioD, fechaD = fechaD, nombreU = nombreU, edadU = edadU, estadoU = estadoU, estaturaU = estaturaU, municipioU =municipioU)
+    
+    return render_template('caracara.html', nombre = nombre, nombreD = nombreD, edadD=edadD, estadoD = estadoD, municipioD = municipioD, fechaD = fechaD, nombreU = nombreU, edadU = edadU, estadoU = estadoU, municipioU =municipioU)
 
 @app.route('/camara')
 def camara(name=None):
@@ -143,20 +138,17 @@ def imagesend():
 	datos_desaparecidos = datos_desaparecido(nombre)
 	nombreD =  datos_desaparecidos['nombre']
 	edadD= datos_desaparecidos['edad']
-	estaturaD = datos_desaparecidos['estatura']
 	estadoD = datos_desaparecidos['estado']
 	municipioD = datos_desaparecidos['municipio']
 	fechaD = datos_desaparecidos['fecha']
 	
 	nombreU = "1"
 	edadU = "2"
-	estaturaU = "3"
-	estadoU = "4"
-	municipioU = "5"
+	estadoU = "3"
+	municipioU = "4"
 	
-	return jsonify(nombre = nombre, nombreD = nombreD, edadD=edadD, estaturaD = estaturaD, estadoD = estadoD, municipioD = municipioD, fechaD = fechaD, nombreU = nombreU, edadU = edadU, estaturaU = estaturaU, estadoU = estadoU, municipioU = municipioU)
+	return jsonify(nombre = nombre, nombreD = nombreD, edadD=edadD, estadoD = estadoD, municipioD = municipioD, fechaD = fechaD, nombreU = nombreU, edadU = edadU, estadoU = estadoU, municipioU = municipioU)
 	
-#res={'nombre':,'apellido','edad','estatura','estado','municipio'}
 def datos_desaparecido(nombre):
     with open('personasdesaparecidas.json','r',encoding='utf8') as f:
         datastore=json.load(f)
@@ -165,7 +157,6 @@ def datos_desaparecido(nombre):
         if(file==nombre):
             res={'nombre':f"{persona['versiones'][0]['prim_nombre']} {persona['versiones'][0]['seg_nombre']} {persona['versiones'][0]['apellido_pat']} {persona['versiones'][0]['apellido_mat']}"
                    ,'edad':persona['versiones'][0]['fuerocomun_edad']
-                   ,'estatura':persona['versiones'][0]['fuerocomun_estatura']
                    ,'estado':persona['versiones'][0]['fuerocomun_desapentidad']
                    ,'municipio':persona['versiones'][0]['fuerocomun_desapmunicipio']
                    ,'fecha':persona['versiones'][0]['fuerocomun_desapfecha']}

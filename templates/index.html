@@ -7,7 +7,7 @@
     <meta name="author" content="BrunoSLopezF">
      <!--<link rel="icon" href="https://getbootstrap.com/docs/4.0/assets/img/favicons/favicon.ico"> Poner logo datalab!!-->
 
-    <title>Un ejercicio de conciencia</title>
+    <title>Un ejercicio de memoria y conciencia</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/cover/">
 
@@ -18,7 +18,7 @@
     <link href="static/cover.css" rel="stylesheet"><!-- Add url_for_static -->
   </head>
 
-  <body class="text-center" cz-shortcut-listen="true">
+  <body class="text-center" cz-shortcut-listen="true" style = "font-size: 160%;">
 
     <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
       <header class="masthead mb-auto">
@@ -28,7 +28,7 @@
 
       <main role="main" class="inner cover">
         <h1 class="cover-heading">Cara a cara: </h1>
-        <h2>Un ejercicio de conciencia sobre la desaparicion en Mexico</h2>
+        <h2>Un ejercicio de memoria y conciencia sobre la desaparición en México</h2>
         <p id = "texto" class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
         <p class="lead">
           <a id="siguiente" href="questions.html" class="btn btn-lg btn-secondary">Empezar</a>
@@ -63,7 +63,6 @@
     $(document).keypress(function(event) {
     if (event.keyCode === 13) {
         $("#siguiente").click();
-        alert('ok');
         
     }
     });

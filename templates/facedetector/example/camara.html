@@ -34,33 +34,51 @@
             }
         #myBar {
             width: 1%;
-            height: 20px;
+            height: 3%;
+            height: 3vh;
             background-color: #4CAF50;
             }
         </style>
         </head>
 
-<body onload="">
-<div class = "container">
-    <div class = "row">
-        <!-- Aqui metemos la cámara  --> 
-        <video id="video" autoplay
-        style="width: 640px; height: 640px; border: 1px solid black;"></video>
-        <canvas id="canvas" ></canvas>
-        <canvas id="imagen" style="display:none" width="640" height="640"></canvas>
-        <img id="photo" style="visibility: hidden; display: none" src=""></img>
+<body onload="" class="text-center" cz-shortcut-listen="true" style = "font-size: 160%;">
+    <div class="cover-container d-flex h-100 p-3 mx-auto flex-column vertical-center">
+        <header class="masthead mb-auto">
+            <div class="inner">
+            </div>
+        </header>
+        <main role="main" class="inner cover vertical-center">
+            <div class = "container">
+                <div id = "myProgress">
+                    <div id = "myBar"></div>
+                </div>
+                <div class = "row">
+                    <div class = "col l">
+                    <p style = "font-size: 140%;">
+                        Instrucciones
+                    </p>
+                    </div>
+                </div>
+                <div class = "row">
+                    <div class = "col">
+                        <!-- Aqui metemos la cámara  --> 
+                        <video id="video" autoplay style="width: 640px; height: 640px; border: 1px solid black;"></video>
+                        <canvas id="canvas" ></canvas>
+                        <canvas id="imagen" style="display:none" width="640" height="640"></canvas>
+                        <img id="photo" style="visibility: hidden; display: none" src=""></img>                    
+                    </div>
+                </div>
+                <div class = "row">
+                    <div class = "col c">
+                        <!-- Botón -->
+                        <p class="lead">
+                            <a href = "#" id="foto" class="btn btn-lg btn-secondary">Tomar Foto</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </main>
     </div>
-    <div class = "row">
-        <!-- Aquí metemos el botón -->
-        <p class="lead" align = "center">
-            <a href = "#" id="foto" class="btn btn-lg btn-secondary">Tomar Foto</a>
-        </p>
-    </div>
-</div>
-
-<div id="myProgress">
-  <div id="myBar"></div>
-</div>
 
 <script src="{{ url_for('static', filename='js/FaceDetector.js') }}"></script>
 <script src="{{ url_for('static', filename='js/WebcamManager.js') }}"></script>
@@ -72,8 +90,7 @@
             take_photo();
             move();
             });
-        });
-        
+        });       
         
 
         function base64ToBlob(base64, mime) 
@@ -98,10 +115,6 @@
 
             return new Blob(byteArrays, {type: mime});
         }
-
-
-
-
 
         function take_photo(){
             canva = document.getElementById('imagen');
@@ -128,7 +141,7 @@
                 data: formData
                 })
                 .done(function(e){
-                    window.location.href="caracara/"+e.nombre+"/"+e.nombreD+"/"+e.edadD+"/"+e.estaturaD+"/"+e.estadoD+"/"+e.municipioD+"/"+e.fechaD+"/"+e.nombreU+"/"+e.edadU+"/"+e.estaturaU+"/"+e.estadoU+"/"+e.municipioU             
+                    window.location.href="caracara/"+e.nombre+"/"+e.nombreD+"/"+e.edadD+"/"+e.estadoD+"/"+e.municipioD+"/"+e.fechaD+"/"+e.nombreU+"/"+e.edadU+"/"+e.estadoU+"/"+e.municipioU             
                 });
              }
         function move() {
@@ -144,8 +157,6 @@
             }
           }
         }
-
-
 
     var camStreamWidth = 640;
     var camStreamHeight = 640;
