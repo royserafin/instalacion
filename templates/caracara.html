@@ -99,7 +99,7 @@
                 <div class = "row">
                     <div class = "col">
                         <p class="lead">
-                            <a href = "#" onclick="llama_estadisticas()" class="btn btn-lg btn-secondary">Continuar</a>
+                            <a href = "#" id = 'siguiente' onclick="llama_estadisticas()" class="btn btn-lg btn-secondary">Continuar</a>
                         </p>
                     </div>
                 </div>
@@ -123,5 +123,13 @@
 <script src=" {{ url_for('static', filename='bootstrap_files/popper.js') }}"></script>
 <script src=" {{ url_for('static', filename='bootstrap_files/bootstrap.js') }}"></script> 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+    $(document).keypress(function(event) {
+    
+    if (event.keyCode === 13) {
+                $('#siguiente').click();
+        }
+    });
+</script>
 
 </body></html>

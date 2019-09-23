@@ -32,10 +32,14 @@
         
         function manda_dato(){
             
-            var nombre = $('#NombreInput').val();
-            var apellido = $('#ApellidoInput').val();
+            var variosnombres = $('#NombreInput').val();
+            nombre = variosnombres.split(" ");
             
-            var url = "/guardadato/" + nombre + '/' + apellido;
+            var variosapellidos = $('#ApellidoInput').val();
+            apellidos = variosapellidos.split(" ");
+            
+            
+            var url = "/guardadato/" + nombre[0] + '/' + apellidos[0];
             $.ajax({
                 url: url, 
                 type: "POST", 
@@ -99,7 +103,7 @@
                 data: 'ok'
                 })
                 .done(function(e){
-                    
+                    window.location.href = 'camara'
                 });
              }
              
@@ -180,21 +184,59 @@
             document.getElementById(otherDivId).className = 'hidden';
         }        
     </script>
-    <script>         
+  
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src=" {{ url_for('static', filename='bootstrap_files/jquery-3.js') }}" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+<script src=" {{ url_for('static', filename='bootstrap_files/popper.js') }}"></script>
+<script src=" {{ url_for('static', filename='bootstrap_files/bootstrap.js') }}"></script> 
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> <!--Obtener js para correrlo local-->
+<script>
+    
+    var page = 0;
+
+    $(document).keypress(function(event) {
+    
+    if (event.keyCode === 13) {
+        
+        if( $("#question1").is(":hidden") == false){
+            $("#manda1").click();
+            return
+        }
+        
+        if( $("#question2").is(":hidden") == false){
+            
+            $("#manda2").click();
+            return
+            
+        }
+        
+        if( $("#question3").is(":hidden") == false){
+            
+            $("#manda3").click();
+            return
+        }
+        
+        if( $("#question4").is(":hidden") == false){
+            $("#manda4").click();
+            return
+        }
+        
+    }
+    });
+    
+    
+</script>
+ <script> 
+            
+            
             let requestedData;
             let stateSelect = document.querySelector('[js-state-select]');
             let citySelect = document.querySelector('[js-city-select]');
-      
-            let loadData = function(callback) {
-              let xhttp = new XMLHttpRequest();
-              xhttp.onreadystatechange = function() {
-                  if (this.readyState == 4 && this.status == 200) {
-                  fillStatesSelect(this.responseText);
-                  }
-              };
-              xhttp.open("GET", "https://raw.githubusercontent.com/martinciscap/json-estados-municipios-mexico/master/estados-municipios.json?fbclid=IwAR3pachbWf58PUXF0ZsBOw8ScuwQuoGsgPXJTpoKnw_xKHDb047679RfqW4", true);
-              xhttp.send();
-              }
+              
       
               let fillCitiesSelect = function() {
                   let cities = requestedData[stateSelect.value];
@@ -210,7 +252,9 @@
       
               let fillStatesSelect = function(data) {
                   let options = [];
-                  requestedData = JSON.parse(data);
+                  requestedData = data;
+                  console.log(typeof requestedData);
+                  console.log(typeof data);
                   Object.keys(requestedData).forEach((x, i) => {
                       options[i] = document.createElement('option');
                       options[i].setAttribute('value', x);
@@ -219,42 +263,15 @@
                   });
                   stateSelect.addEventListener('change', fillCitiesSelect);
               }
-              loadData(fillStatesSelect);
+              
+              var json_estados;
+            
+            $.getJSON("{{url_for('static', filename='estados-municipios.json')}}", function(json) {
+                json_estados = json;
+                console.log(json_estados);
+                fillStatesSelect(json_estados); 
+            });
+              
+             
         </script>
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src=" {{ url_for('static', filename='bootstrap_files/jquery-3.js') }}" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-<script src=" {{ url_for('static', filename='bootstrap_files/popper.js') }}"></script>
-<script src=" {{ url_for('static', filename='bootstrap_files/bootstrap.js') }}"></script> 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> <!--Obtener js para correrlo local-->
-<script>
-    
-    
-
-    $(document).keypress(function(event) {
-    if (event.keyCode === 13) {
-        if( $("#question1").is(":hidden") == false ){
-            $("#manda1").click();
-        }
-        
-        if( $("#question2").is(":hidden") == false){
-            $("#manda2").click();
-        }
-        
-        if( $("#question3").is(":hidden") == false){
-            $("#manda3").click();
-        }
-        
-        if( $("#question4").is(":hidden") == false){
-            $("#manda4").click();
-        }
-        
-    }
-    });
-    
-    
-</script>
 </body></html>

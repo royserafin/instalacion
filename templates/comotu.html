@@ -36,7 +36,7 @@
                     En esta base de personas desaparecidas hay <strong>{{nombre_stats}}</strong> personas que también se llaman {{nombre}} y <strong>{{apellido_stats}}</strong> que se apellidan {{apellido}}, <i> como tú</i>.
                 </p>
                 <p class = "lead">
-                    <input class = "btn btn-lg btn-secondary" type="button" onclick="unhide('text2','text1')" value = "Continuar">
+                    <input id = 'siguiente1' class = "btn btn-lg btn-secondary" type="button" onclick="unhide('text2','text1')" value = "Continuar">
                 </p>
             </div>
             <div class = "hidden" id = "text2">
@@ -44,7 +44,7 @@
                     En esta base de personas desaparecidas hay <strong>{{edad_stats}}</strong> que, <i>como tú</i>, tienen {{edad}} años.
                 </p>
                 <p class = "lead">
-                    <input class = "btn btn-lg btn-secondary" type="button" onclick="unhide('text3','text2')" value = "Continuar">
+                    <input id = 'siguiente2' class = "btn btn-lg btn-secondary" type="button" onclick="unhide('text3','text2')" value = "Continuar">
                 </p>
             </div>
             <div class = "hidden" id = "text3">
@@ -52,7 +52,7 @@
                     En esta base de personas desaparecidas hay <strong>{{estado_stats}}</strong> personas que también son de {{estado}} y <strong>{{municipio_stats}}</strong> que son de {{municipio}}, <i> como tú</i>.
                 </p>
                 <p class="lead">
-                    <a href="/message.html" class="btn btn-lg btn-secondary">Continuar</a>
+                    <a id = 'siguiente3' href="/message.html" class="btn btn-lg btn-secondary">Continuar</a>
                 </p>
             </div>
         </div>
@@ -82,4 +82,36 @@
 <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
 <script src=" {{ url_for('static', filename='bootstrap_files/popper.js') }}"></script>
 <script src=" {{ url_for('static', filename='bootstrap_files/bootstrap.js') }}"></script> 
+<script>
+    
+    var page = 0;
+
+    $(document).keypress(function(event) {
+    
+    if (event.keyCode === 13) {
+        
+        if( $("#text1").is(":hidden") == false){
+            $("#siguiente1").click();
+            return
+        }
+        
+        if( $("#text2").is(":hidden") == false){
+            
+            $("#siguiente2").click();
+            return
+            
+        }
+        
+        if( $("#text3").is(":hidden") == false){
+            
+            $("#siguiente3").click();
+            return
+        }
+        
+        
+    }
+    });
+    
+    
+</script>
 </body></html>
