@@ -106,6 +106,14 @@ def cara(nombre, nombreD, edadD, estadoD, municipioD, fechaD, nombreU, edadU, es
 def camara(name=None):
     return render_template('facedetector/example/camara.html')
     
+@app.route('/calltoaction')
+def calltoaction(name=None):
+    return render_template('calltoaction.html')
+    
+@app.route('/avisodeprivacidad')
+def avisodeprivacidad(name=None):
+    return render_template('avisodeprivacidad.html')
+    
 @app.after_request
 def add_header(r):
     """
