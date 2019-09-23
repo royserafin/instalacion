@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 # USAGE
 # When encoding on laptop, desktop, or GPU (slower, more accurate):
 # python encode_faces.py --dataset dataset --encodings encodings.pickle --detection-method cnn
@@ -11,7 +14,11 @@ import argparse
 import pickle
 import cv2
 import os
+import numpy as np
 
+def cv_imread(file_path):
+	cv_img = cv2.imdecode(np.fromfile(file_path, dtype=np.uint8), -1)
+	return cv_img
 # construct the argument parser and parse the arguments
 ap = argparse.ArgumentParser()
 ap.add_argument("-i", "--dataset", required=True,
@@ -39,8 +46,9 @@ for (i, imagePath) in enumerate(imagePaths):
 
 	# load the input image and convert it from RGB (OpenCV ordering)
 	# to dlib ordering (RGB)
+
 	print(imagePath)
-	image = cv2.imread(imagePath)
+	image = cv_imread(imagePath)
 	rgb = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
 	# detect the (x, y)-coordinates of the bounding boxes
