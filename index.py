@@ -127,8 +127,8 @@ def imagesend():
 	
 	
 	filename = 'static/Faces/' + foto_index + '.jpg'  # I assume you have a way of picking unique filenames
-	#with open(filename, 'wb') as f:
-	#    f.write(data)
+	with open(filename, 'wb') as f:
+	    f.write(data)
 	
 	nombre = fr.encuentra_cara()
 	text_file=open("match_text.txt",'w')
@@ -162,6 +162,8 @@ def imagesend():
 	return jsonify(nombre = nombre, nombreD = nombreD, edadD=edadD, estadoD = estadoD, municipioD = municipioD, fechaD = fechaD, nombreU = nombreU, edadU = edadU, estadoU = estadoU, municipioU = municipioU)
 	
 def datos_desaparecido(nombre):
+    nombre = nombre.replace("Ñ","N")
+    nombre = nombre.replace("ñ","n")
     with open('base_de_fotos.json','r',encoding='utf8') as f:
         datastore=json.load(f)
     for persona in datastore:
