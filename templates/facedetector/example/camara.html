@@ -55,7 +55,7 @@
                 <div class = "row">
                     <div class = "col l">
                     <p style = "font-size: 140%;">
-                        Colócate frente a la cámara y presiona Enter para tomar una foto
+                        Colócate frente a la cámara, espera a que tu cara sea detectada y presiona Enter para tomar una foto
                     </p>
                     </div>
                 </div>
@@ -73,7 +73,7 @@
                     <div class = "col c">
                         <!-- Botón -->
                         <p class="lead">
-                            <a href = "#" id="foto" class="btn btn-lg btn-secondary">Tomar Foto</a>
+                            <a href = "#" id="foto" class="btn btn-lg btn-secondary">Enter</a>
                         </p>
                     </div>
                 </div>
@@ -226,13 +226,13 @@
         ctx.strokeStyle = "white";
         ctx.lineWidth = 3;
         ctx.fillStyle = "white";
-        ctx.font = "10px arial";
+        ctx.font = "14px arial";
 
         for (var i = 0; i < detectedFaces.length; i++) {
 
             var face = detectedFaces[i];
 
-            ctx.fillText('Identificando persona desaparecida', face.x * VIEW_WIDTH, face.y * VIEW_HEIGHT);
+            ctx.fillText('Buscando en base de datos de desaparecidos', face.x * VIEW_WIDTH, face.y * VIEW_HEIGHT);
             ctx.strokeRect(face.x * VIEW_WIDTH, face.y * VIEW_HEIGHT + 10, face.width * VIEW_WIDTH, face.height * VIEW_HEIGHT);
 
         }
