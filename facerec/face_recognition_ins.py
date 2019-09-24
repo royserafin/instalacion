@@ -13,7 +13,7 @@ import face_recognition
 def encuentra_cara():
     # import the necessary packages
 
-    
+
 
     #camera = PiCamera()
 
@@ -71,11 +71,14 @@ def encuentra_cara():
             counts[name] = counts.get(name, 0) + 1
     for key, value in counts.items():
         print(key, value)
-    nombre = max(counts, key=counts.get)
+    try:
+        nombre = max(counts, key=counts.get)
+    except:
+        nombre = 'REGINO_ALBERTO_MENDOZA_GALAVIZ' 
 
-    archivo = nombre 
+
+    archivo = nombre
     print(archivo)
     return archivo
     # do a bit of cleanup
     #cv2.destroyAllWindows()
-
