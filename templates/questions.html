@@ -28,75 +28,75 @@
         </div>
       </header>
 
-   <script> 
-        
+   <script>
+
         function manda_dato(){
-            
+
             var variosnombres = $('#NombreInput').val();
             nombre = variosnombres.split(" ");
-            
+
             var variosapellidos = $('#ApellidoInput').val();
             apellidos = variosapellidos.split(" ");
-            
-            
+
+
             var url = "/guardadato/" + nombre[0] + '/' + apellidos[0];
             $.ajax({
-                url: url, 
-                type: "POST", 
+                url: url,
+                type: "POST",
                 cache: false,
                 contentType: false,
                 processData: false,
                 data: 'ok'
                 })
                 .done(function(e){
-                    
+
                 });
              }
-             
+
         function manda_dato2(){
-            
+
             var edad = $('#EdadInput').val();
-            
-            
+
+
             var url = "/guardadato2/" + edad;
             $.ajax({
-                url: url, 
-                type: "POST", 
+                url: url,
+                type: "POST",
                 cache: false,
                 contentType: false,
                 processData: false,
                 data: 'ok'
                 })
                 .done(function(e){
-                    
+
                 });
              }
             function manda_dato3(){
-            
+
             var edad = $('#EstaturaInput').val();
-            
-            
+
+
             var url = "/guardadato3/" + edad;
             $.ajax({
-                url: url, 
-                type: "POST", 
+                url: url,
+                type: "POST",
                 cache: false,
                 contentType: false,
                 processData: false,
                 data: 'ok'
                 })
                 .done(function(e){
-                    
+
                 });
              }
-             
+
              function manda_dato4(){
                var estado = $('#EstadoSelect option:selected').val();
                var municipio = $('#MunicipioSelect option:selected').val();
                var url = "/guardadato4/" + estado + '/' + municipio;
             $.ajax({
-                url: url, 
-                type: "POST", 
+                url: url,
+                type: "POST",
                 cache: false,
                 contentType: false,
                 processData: false,
@@ -106,9 +106,9 @@
                     window.location.href = 'camara'
                 });
              }
-             
-             
-          
+
+
+
     </script>
       <main role="main" class="inner cover">
           <div class = "unhidden" id = "question1">
@@ -123,9 +123,9 @@
                     </div>
                 </form>
                 <p class="lead">
-                    
+
                     <input id = "manda1" class="btn btn-lg btn-secondary" type="button" onclick="unhide('question2', 'question1'); manda_dato(); " value="Continuar">
-                    
+
                 </p>
             </div>
             <div class = "hidden" id="question2">
@@ -182,9 +182,9 @@
                 item.className=(item.className=='hidden')?'unhidden':'hidden';
             }
             document.getElementById(otherDivId).className = 'hidden';
-        }        
+        }
     </script>
-  
+
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
@@ -192,53 +192,54 @@
 <script src=" {{ url_for('static', filename='bootstrap_files/jquery-3.js') }}" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
 <script src=" {{ url_for('static', filename='bootstrap_files/popper.js') }}"></script>
-<script src=" {{ url_for('static', filename='bootstrap_files/bootstrap.js') }}"></script> 
+<script src=" {{ url_for('static', filename='bootstrap_files/bootstrap.js') }}"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> <!--Obtener js para correrlo local-->
 <script>
-    
+
     var page = 0;
 
     $(document).keypress(function(event) {
-    
+
     if (event.keyCode === 13) {
+        event.preventDefault();
         console.log(page);
-        
-        
+
+
         if(page == 0){
             $("#manda1").click();
             page = 1;
             return
         }
-        
+
         if(page == 1){
             $("#manda2").click();
             page = page+1;
             return
         }
-        
-        if(page == 3){
+
+        if(page == 2){
             $("#manda4").click();
             window.location.href = 'camara';
             page = 4;
-            
-        }  
-        
+
+        }
+
     }
     });
-    
-    
+
+
 </script>
- <script> 
-            
-            
+ <script>
+
+
             let requestedData;
             let stateSelect = document.querySelector('[js-state-select]');
             let citySelect = document.querySelector('[js-city-select]');
-              
-      
+
+
               let fillCitiesSelect = function() {
                   let cities = requestedData[stateSelect.value];
-                  let options = [];            
+                  let options = [];
                   citySelect.innerHTML = '';
                   cities.forEach((x, i) => {
                       options[i] = document.createElement('option');
@@ -247,7 +248,7 @@
                       citySelect.appendChild(options[i]);
                   });
               }
-      
+
               let fillStatesSelect = function(data) {
                   let options = [];
                   requestedData = data;
@@ -261,15 +262,15 @@
                   });
                   stateSelect.addEventListener('change', fillCitiesSelect);
               }
-              
+
               var json_estados;
-            
+
             $.getJSON("{{url_for('static', filename='estados-municipios.json')}}", function(json) {
                 json_estados = json;
                 console.log(json_estados);
-                fillStatesSelect(json_estados); 
+                fillStatesSelect(json_estados);
             });
-              
-             
+
+
         </script>
 </body></html>
