@@ -37,6 +37,14 @@
 
             var variosapellidos = $('#ApellidoInput').val();
             apellidos = variosapellidos.split(" ");
+            
+            if (nombre == ''){
+                nombre = 'None'
+            }
+
+            if (apellidos == ''){
+                apellidos = 'None'
+            }
 
 
             var url = "/guardadato/" + nombre[0] + '/' + apellidos[0];
@@ -56,6 +64,10 @@
         function manda_dato2(){
 
             var edad = $('#EdadInput').val();
+            if (edad == ''){
+                edad = 'None'
+            }
+
 
 
             var url = "/guardadato2/" + edad;
@@ -74,7 +86,9 @@
             function manda_dato3(){
 
             var edad = $('#EstaturaInput').val();
-
+            if (edad == ''){
+                edad = 'None'
+            }
 
             var url = "/guardadato3/" + edad;
             $.ajax({
@@ -93,6 +107,14 @@
              function manda_dato4(){
                var estado = $('#EstadoSelect option:selected').val();
                var municipio = $('#MunicipioSelect option:selected').val();
+                if (estado == ''){
+                    estado = 'None'
+                }
+
+                if (municipio == ''){
+                            municipio = 'None'
+                        }
+
                var url = "/guardadato4/" + estado + '/' + municipio;
             $.ajax({
                 url: url,
