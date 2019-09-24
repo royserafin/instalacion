@@ -30,35 +30,35 @@ def questions(name=None):
 @app.route('/message.html')
 def message(name=None):
     return render_template('message.html')
-    
+
 @app.route('/guardadato/<nombre>/<apellido>', methods = ['POST'])
 def guardadato(nombre, apellido):
     text_file=open("datos_usuario.txt",'w')
     n = text_file.write(nombre + '\n')
     n = text_file.write(apellido + '\n')
     text_file.close()
-    
+
     return jsonify(respuesta='ke pedo puto')
-    
+
 @app.route('/guardadato2/<edad>', methods = ['POST'])
 def guardadato2(edad):
     text_file=open("datos_usuario.txt",'a')
     n = text_file.write(edad + '\n')
     text_file.close()
-    
+
     return jsonify(respuesta='ke pedo puto')
-    
+
 @app.route('/guardadato4/<estado>/<municipio>', methods = ['POST'])
 def guardadato4(estado, municipio):
     text_file=open("datos_usuario.txt",'a')
     n = text_file.write(estado + '\n')
     n = text_file.write(municipio + '\n')
     text_file.close()
-    
+
     return jsonify(respuesta='Ok')
 
 @app.route('/comotu/<nombre>/<apellido>/<edad>/<estado>/<municipio>/<nombre_stats>/<apellido_stats>/<edad_stats>/<estado_stats>/<municipio_stats>')
-def comotu(nombre, apellido, edad, estado, municipio, nombre_stats, apellido_stats, edad_stats, estado_stats, municipio_stats):              
+def comotu(nombre, apellido, edad, estado, municipio, nombre_stats, apellido_stats, edad_stats, estado_stats, municipio_stats):
     #print(nombre.split())
     nombre, apellido = nombre.split()
     #print(nombre,edad,estado,municipio)
@@ -67,7 +67,7 @@ def comotu(nombre, apellido, edad, estado, municipio, nombre_stats, apellido_sta
     apellido = apellido.capitalize()
     estado = estado.capitalize()
     municipio = municipio.capitalize()
-    
+
     datos_estadisticas = estadisticas(nombre, apellido, edad, estado, municipio)
     #print(datos_estadisticas['nombre'])
     nombre_stats = datos_estadisticas['nombre']
@@ -83,10 +83,10 @@ def cara(nombre, nombreD, edadD, estadoD, municipioD, fechaD, nombreU, edadU, es
     # leer el txt o name
     # buscar en el json el nombre y obtener sus datos
     # enviar eso por post a javascript
-    
+
     # leer txt de usuario actual que contiene nombre datos
     # ya se donde esta guardada la foto de la persona,
-    
+
     text_file=open("datos_usuario.txt",'r')
     n = text_file.readline()
     n2 = text_file.readline()
@@ -99,21 +99,21 @@ def cara(nombre, nombreD, edadD, estadoD, municipioD, fechaD, nombreU, edadU, es
     municipioU = text_file.readline()
     municipioU = municipioU.upper()
     text_file.close()
-    
+
     return render_template('caracara.html', nombre = nombre, nombreD = nombreD, edadD=edadD, estadoD = estadoD, municipioD = municipioD, fechaD = fechaD, nombreU = nombreU, edadU = edadU, estadoU = estadoU, municipioU =municipioU)
 
 @app.route('/camara')
 def camara(name=None):
     return render_template('facedetector/example/camara.html')
-    
+
 @app.route('/calltoaction')
 def calltoaction(name=None):
     return render_template('calltoaction.html')
-    
+
 @app.route('/avisodeprivacidad')
 def avisodeprivacidad(name=None):
     return render_template('avisodeprivacidad.html')
-    
+
 @app.after_request
 def add_header(r):
     """
@@ -131,18 +131,18 @@ def imagesend():
 	#i = request.files['foto'].read()
 	data = request.files['imagen'].read()
 	foto_index = request.form["foto"]
-	
-	
-	
+
+
+
 	filename = 'static/Faces/' + foto_index + '.jpg'  # I assume you have a way of picking unique filenames
-	#with open(filename, 'wb') as f:
-	#    f.write(data)
-	
+	with open(filename, 'wb') as f:
+	    f.write(data)
+
 	nombre = fr.encuentra_cara()
 	text_file=open("match_text.txt",'w')
 	n = text_file.write(nombre)
 	text_file.close()
-	
+
 	datos_desaparecidos = datos_desaparecido(nombre)
 	nombreD =  datos_desaparecidos['nombre']
 	if (nombreD == ''):
@@ -159,16 +159,16 @@ def imagesend():
 	fechaD = datos_desaparecidos['fecha']
 	if (fechaD == ''):
 	    fechaD = 'Desconocido'
-	
-	
-	
+
+
+
 	nombreU = "1"
 	edadU = "2"
 	estadoU = "3"
 	municipioU = "4"
-	
+
 	return jsonify(nombre = nombre, nombreD = nombreD, edadD=edadD, estadoD = estadoD, municipioD = municipioD, fechaD = fechaD, nombreU = nombreU, edadU = edadU, estadoU = estadoU, municipioU = municipioU)
-	
+
 def datos_desaparecido(nombre):
     nombre = nombre.replace("Ñ","N")
     nombre = nombre.replace("ñ","n")
