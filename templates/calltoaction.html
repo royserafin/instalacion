@@ -19,31 +19,46 @@
     <link href=" {{ url_for('static', filename='cover.css') }}" rel="stylesheet">
   </head>
 
-  <body class="text-center" cz-shortcut-listen="true">
+<body class="text-center" cz-shortcut-listen="true" style = "background-color:white;">
 
-    <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+    <div class="cover-container2 d-flex h-100 p-3 mx-auto flex-column">
       <header class="masthead mb-auto">
         <div class="inner">
         </div>
       </header>
-
-      <main role="main" class="inner cover">
-        <h1 class="cover-heading">Un llamado a la acción </h1> <br> <br>
-        <h3 id = "texto">
-            
-
-Reina Torrecillas, madre de Eleazar Hernández, buscó a su hijo durante ocho meses antes de enterarse que había aparecido en el SEMEFO apenas 3 días después de su desaparición.  <br> <br>
-
-La razón: la falta de integración de datos y la completa obsolescencia tecnológica de las autoridades. <br> <br>
-
-La tecnología usada en Cara a Cara debe ser implementada para determinar si alguien que llega a un SEMEFO está reportado como desaparecido, ayudando así a cerrar miles de ciclos de luto. <br> <br>
-
-Si deseas unirte a esta exigencia, síguenos en Twitter en @datalabitam para recibir más información sobre los siguientes pasos. <br> <br> </h3>
-
-            <p class= "text">Tus datos serán utilizados con fines estadísticos por los diseñadores de esta experiencia. En caso de que desees que no sean guardados, revisa el <a href="avisodeprivacidad">Aviso de privacidad</a> y selecciona la casilla de negativa. </p> <br> 
-            <a href="/" class="btn btn-lg btn-secondary"> Terminar </a>
-            
-        </p>
+        <main role="main" class="inner cover">
+        <div class = "container">
+          <div class = "row c">
+              <div class = "col-lg-12">
+                <h1 class = "call"><strong>Un llamado a la acción</strong></h1>
+              </div>
+          </div>
+          <div class = "row c">
+              <div class = "col">
+                <p class = "message2">
+                    <br>
+                    Reina Torrecillas, madre de Eleazar Hernández, buscó a su hijo durante ocho meses antes de enterarse que había aparecido en el SEMEFO apenas 3 días después de su desaparición. <br><br>
+                    La razón: la falta de integración de datos y la completa obsolescencia tecnológica de las autoridades.<br><br>
+                    La tecnología usada en Cara a Cara debe ser implementada para determinar si alguien que llega a un SEMEFO está reportado como desaparecido, ayudando así a cerrar miles de ciclos de luto. <br><br>
+                    Si deseas unirte a esta exigencia, síguenos en Twitter en @datalabitam para recibir más información sobre los siguientes pasos. <br><br>
+                </p>
+              </div>
+          </div>
+          <div class = "row">
+              <div class = "col">
+                <p class="footnote">
+                  Tus datos serán utilizados con fines estadísticos por los diseñadores de esta experiencia. En caso de que desees que no sean guardados, revisa el <a href="avisodeprivacidad" class ="call" style="color:#C32B3D">Aviso de privacidad</a> y selecciona la casilla de negativa.<br> 
+                </p>
+              </div>
+          </div>
+          <div class = "row">
+              <div class = "col">
+                  <p class = "lead">
+                      <a href="/" class="btn btn-lg btn-tertiary"> Terminar </a>
+                  </p>
+              </div>
+          </div>
+        </div>
       </main>
 
       <footer class="mastfoot mt-auto">
@@ -62,6 +77,19 @@ Si deseas unirte a esta exigencia, síguenos en Twitter en @datalabitam para rec
 <script src=" {{ url_for('static', filename='bootstrap_files/popper.js') }}"></script>
 <script src=" {{ url_for('static', filename='bootstrap_files/bootstrap.js') }}"></script> 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+    $(document).keypress(function(event) {
+    
+    if (event.keyCode === 13) {
+        
+        
+      window.location.href = '/';  
+        
+         
+        
+    }
+    });
+</script>
   
 
 </body></html>

@@ -124,7 +124,7 @@
                 </form>
                 <p class="lead">
                     
-                    <input id = 'manda1' class="btn btn-lg btn-secondary" type="button" onclick="unhide('question2', 'question1'); manda_dato(); " value="Continuar">
+                    <input id = "manda1" class="btn btn-lg btn-secondary" type="button" onclick="unhide('question2', 'question1'); manda_dato(); " value="Continuar">
                     
                 </p>
             </div>
@@ -164,7 +164,7 @@
                     </div>
                 </form>
                 <p class="lead">
-                  <a href="camara" id= "manda4" class="btn btn-lg btn-secondary" onclick="manda_dato4()" >Continuar</a>
+                    <input id = "manda4" class="btn btn-lg btn-secondary" type="button" onclick="manda_dato4()" value="Continuar">
                 </p>
             </div>
       </main>
@@ -201,29 +201,27 @@
     $(document).keypress(function(event) {
     
     if (event.keyCode === 13) {
+        console.log(page);
         
-        if( $("#question1").is(":hidden") == false){
+        
+        if(page == 0){
             $("#manda1").click();
+            page = 1;
             return
         }
         
-        if( $("#question2").is(":hidden") == false){
-            
+        if(page == 1){
             $("#manda2").click();
-            return
-            
-        }
-        
-        if( $("#question3").is(":hidden") == false){
-            
-            $("#manda3").click();
+            page = page+1;
             return
         }
         
-        if( $("#question4").is(":hidden") == false){
+        if(page == 3){
             $("#manda4").click();
-            return
-        }
+            window.location.href = 'camara';
+            page = 4;
+            
+        }  
         
     }
     });

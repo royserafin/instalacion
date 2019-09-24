@@ -52,7 +52,7 @@
                     En esta base de personas desaparecidas hay <strong>{{estado_stats}}</strong> personas que también son de {{estado}} y <strong>{{municipio_stats}}</strong> que son de {{municipio}}, <i> como tú</i>.
                 </p>
                 <p class="lead">
-                    <a id = 'siguiente3' href="/message.html" class="btn btn-lg btn-secondary">Continuar</a>
+                    <a id = 'siguiente3' href="/message.html" onclick= 'redirect_mess()' class="btn btn-lg btn-secondary">Continuar</a>
                 </p>
             </div>
         </div>
@@ -84,30 +84,40 @@
 <script src=" {{ url_for('static', filename='bootstrap_files/bootstrap.js') }}"></script> 
 <script>
     
+    function redirect_mess(){
+        window.location.href = "/message.html";
+        }
+   
+    
+    
     var page = 0;
 
     $(document).keypress(function(event) {
     
     if (event.keyCode === 13) {
+        console.log(page);
         
-        if( $("#text1").is(":hidden") == false){
+        
+        if(page == 0){
             $("#siguiente1").click();
+            page = page + 1;
             return
         }
         
-        if( $("#text2").is(":hidden") == false){
-            
+        if(page == 1){
             $("#siguiente2").click();
+            page = page + 1;
             return
-            
         }
         
-        if( $("#text3").is(":hidden") == false){
-            
+        if(page == 2){
             $("#siguiente3").click();
-            return
+            page = page + 1;
+            
         }
         
+           
+       
         
     }
     });

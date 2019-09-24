@@ -8,6 +8,13 @@ a:focus,
 a:hover {
   color: #fff;
 }
+a.call:focus,
+a.call:hover {
+  color: #333;
+}
+h1.call{
+  color: #333;
+}
 
 /* Custom default button */
 .btn-secondary,
@@ -53,7 +60,9 @@ body {
 .cover-container {
   max-width: 80%;
 }
-
+.cover-container2 {
+  max-width: 90%;
+}
 
 /*
  * Header
@@ -140,6 +149,14 @@ div.c{
   text-align:center;
 }
 p.message{
-  font-size: 195%;
+  font-size: 225%;
+  color:#241F1C;
+}
+p.message2{
+  font-size:170%;
+  color:#241F1C;
+}
+p.footnote{
+  font-size: 85%;
   color:#241F1C;
 }

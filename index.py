@@ -135,8 +135,8 @@ def imagesend():
 	
 	
 	filename = 'static/Faces/' + foto_index + '.jpg'  # I assume you have a way of picking unique filenames
-	with open(filename, 'wb') as f:
-	    f.write(data)
+	#with open(filename, 'wb') as f:
+	#    f.write(data)
 	
 	nombre = fr.encuentra_cara()
 	text_file=open("match_text.txt",'w')

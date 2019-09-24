@@ -45,8 +45,8 @@
               Nos faltan <strong>43</strong><br>
               Nos faltan <strong>40,000</strong><br>
               Nos falta <span style = "color:#C32B3D"><strong>verdad</strong></span>,<br>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style = "color:#C32B3D"><strong>empatía</strong></span><br>
-              &nbsp;&nbsp;y <span style = "color:#C32B3D"><strong>acción</strong></span>.<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style = "color:#C32B3D"><strong>empatía</strong></span><br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y <span style = "color:#C32B3D"><strong>acción</strong></span>.
             </p>
           </div>
           <div class = "row">
@@ -74,4 +74,17 @@
 <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
 <script src=" {{ url_for('static', filename='bootstrap_files/popper.js') }}"></script>
 <script src=" {{ url_for('static', filename='bootstrap_files/bootstrap.js') }}"></script> 
+<script>
+  $(document).keypress(function(event) {
+    
+    if (event.keyCode === 13) {
+        
+        
+      window.location.href = 'calltoaction';  
+        
+         
+        
+    }
+    });
+</script>
 </body></html>
