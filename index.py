@@ -14,6 +14,8 @@ import numpy as np
 import json
 from numpy import linalg as la
 import pandas as pd
+import os
+import shutil
 
 
 app = Flask(__name__)
@@ -80,6 +82,8 @@ def comotu(nombre, apellido, edad, estado, municipio, nombre_stats, apellido_sta
 
 @app.route('/caracara/<nombre>/<nombreD>/<edadD>/<estadoD>/<municipioD>/<fechaD>/<nombreU>/<edadU>/<estadoU>/<municipioU>')
 def cara(nombre, nombreD, edadD, estadoD, municipioD, fechaD, nombreU, edadU, estadoU, municipioU):
+    
+     
     # leer el txt o name
     # buscar en el json el nombre y obtener sus datos
     # enviar eso por post a javascript
@@ -99,6 +103,9 @@ def cara(nombre, nombreD, edadD, estadoD, municipioD, fechaD, nombreU, edadU, es
     municipioU = text_file.readline()
     municipioU = municipioU.upper()
     text_file.close()
+    
+    #aprovechamos para guardar foto de desaparecido
+    #shutil.copyfile('/home/pi/Documents/instalacion/static/Imagenes/' + nombreD + '/' + nombreD + '.jpg', '/home/pi/Documents/instalacion/datos_usuarios/' + nombreD + '=' + nombreU + '.jpg') 
 
     return render_template('caracara.html', nombre = nombre, nombreD = nombreD, edadD=edadD, estadoD = estadoD, municipioD = municipioD, fechaD = fechaD, nombreU = nombreU, edadU = edadU, estadoU = estadoU, municipioU =municipioU)
 
@@ -211,6 +218,8 @@ def acentos(cad):
     return cad
 
 def estadisticas(nombre, apellido, edad, estado, municipio):
+    # aprovechamos esta función para guardar los datos del usuario
+    guarda_datos_usuario(nombre)
     df3=pd.read_csv('report_12_01_2018_2.csv')
     nombre = acentos(nombre)
     apellido = acentos(apellido)
@@ -231,3 +240,18 @@ def estadisticas(nombre, apellido, edad, estado, municipio):
     res['municipio'] =df3[(df3['fuerocomun_desapentidad'] == estado.upper()) & (df3['fuerocomun_desapmunicipio'] == municipio.upper())].shape[0]
 
     return res
+    
+def guarda_datos_usuario(nombre):
+   datos_usuario = open('datos_usuario.txt','r')
+   text_datos = datos_usuario.read()
+   permanent_file = open('datos_usuarios/' + nombre + '.txt','w')
+   permanent_file.write(text_datos)
+   datos_usuario.close
+   permanent_file.close
+   os.rename("/home/pi/Documents/instalacion/static/Faces/0.jpg", "/home/pi/Documents/instalacion/datos_usuarios/" + nombre + '.jpg')
+   
+   return 
+   
+   
+   
+	
