@@ -1,8 +1,11 @@
 # Cara a Cara
 
 **Rodrigo Calderón**
+
 **Bruno López**
+
 **Rodolfo Ocampo**
+
 **Jerónimo Aranda**
 
 ## Cabina
