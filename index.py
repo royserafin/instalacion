@@ -22,15 +22,15 @@ app = Flask(__name__)
 
 
 @app.route('/')
-def hello(name=None):
+def hello():
     return render_template('index.html')
 
 @app.route('/questions.html')
-def questions(name=None):
+def questions():
     return render_template('questions.html')
 
 @app.route('/message.html')
-def message(name=None):
+def message():
     return render_template('message.html')
 
 @app.route('/guardadato/<nombre>/<apellido>', methods = ['POST'])
